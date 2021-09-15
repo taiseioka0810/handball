@@ -1,0 +1,41 @@
+<h3>スコア</h3>
+    <%= form_for(@games, :url => { controller:'games', action:'create'})do |f| %>
+        <%= f.label :日付 %>
+        <div class="field">
+            <%= f.text_field :back_number,size: 5%>
+        </div>
+
+        <%= f.label :場所 %>
+        <div class="field">
+            <%= f.text_field :name,size: 30%>
+        </div>
+
+        <%= f.label :大会名 %>
+        <div class="field">
+            <%= f.text_field :name,size: 30%>
+        </div>
+
+        <%= f.label :性別 %>
+        <div class="field">
+            <%= f.text_field :name,size: 30%>
+        </div>
+
+        <%= f.label :回戦 %>
+        <div class="field">
+            <%= f.text_field :name,size: 30%>
+        </div>
+
+        <%= f.label :種別 %>
+        <div class="field">
+            <%= f.text_field :name,size: 30%>
+        </div>
+        <%= f.submit "登録"%>
+    <% end %>
+
+
+
+<%= link_to 'ホームに戻る', homes_path %>
+<%# <%= link_to 'スコア編集', edit_game_path(t.id) %> 
+
+
+

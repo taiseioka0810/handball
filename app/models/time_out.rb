@@ -1,0 +1,2 @@
+class TimeOut < ApplicationRecord
+end

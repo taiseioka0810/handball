@@ -1,0 +1,55 @@
+<h1>メンバー一覧</h1>
+    <% @members1.each do |t| %>
+        <div class="main-box">
+            <div class="left-container"><%= t.back_number %></div>
+            <div class="middle-container"><%= t.name %></div>
+            <div class="right-container">
+                <%= link_to "編集", edit_member_path(t.id) %>
+                <%= link_to "削除", member_path(t.id), method: :delete %>
+            </div>
+        </div>
+    <% end %>
+
+
+    <% @members2.each do |t| %>
+        <div class="main-box">
+            <div class="left-container"><%= t.rank %></div>
+            <div class="middle-container"><%= t.name %></div>
+            <div class="right-container">
+                <%= link_to "編集", edit_ourexective_path(t.id) %>
+                <%= link_to "削除", ourexective_path(t.id), method: :delete %>
+            </div>
+        </div>
+    <% end %>
+
+
+    <%= form_for(@members3, :url => { controller:'members', action:'create'})do |f| %>
+        <%= f.label :メンバー背番号 %>
+        <div class="field">
+            <%= f.text_field :back_number,size: 5%>
+        </div>
+
+        <%= f.label :メンバー氏名 %>
+        <div class="field">
+            <%= f.text_field :name,size: 30%>
+        </div>
+        <%= f.submit "登録"%>
+    <% end %>
+
+
+    <%= form_for(@members4, :url => { controller:'ourexectives', action:'create'})do |h| %>
+        <%= h.label :役員ランク %>
+        <div class="field">
+            <%= h.select :rank, 
+            [["A"],["B"],["C"],["D"]], include_blank: "選択して下さい" %>
+        </div>
+
+        <%= h.label :役員氏名 %>
+        <div class="field">
+            <%= h.text_field :name,size: 30%>
+        </div>
+        <%= h.submit "登録"%>
+    <% end %> 
+
+
+<%= link_to 'トップページ', homes_path %>

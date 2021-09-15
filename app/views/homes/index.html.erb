@@ -1,0 +1,23 @@
+<h3>ホーム</h3>
+<%= link_to "チームメンバー登録", members_path %>
+<div class="homes-container">
+  <% @homes1.each do |t| %>
+    <div class="home">
+      <%= t.date %>
+      <%= t.place %>
+      <%= t.game_name %>
+      <%= t.game_round %>
+      <%= t.gender %>
+      <%= t.created_at %>
+      
+      <%# <%= link to "スコア詳細へ", home_path(t.id) %> 
+    </div>
+  <% end %>
+</div>
+
+<%# 仮置き，スコアの画像？からリンクさせる %>
+<%= link_to 'スコア経過', games_path %>
+<%#  %>
+
+<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
+

@@ -1,0 +1,13 @@
+<h3>役員編集</h3>
+    <%= form_for(@members4, :url => { controller:'ourexectives', action:'update'})do |f| %>
+        <%= f.label :役員ランク %>
+        <%= f.select :rank, 
+            [["A"],["B"],["C"],["D"]], include_blank: "選択して下さい" %>
+        <%= f.submit "編集する" %>
+
+        <%= f.label :役員氏名 %>
+        <%= f.text_field :name, :size => 30 %> 
+        <%= f.submit "編集する" %>
+    <% end %>
+
+<%= link_to "メンバー一覧に戻る", members_path %>

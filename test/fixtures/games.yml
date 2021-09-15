@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  back_number: 1
+  time: 2021-09-02 16:27:14
+  action: MyString
+
+two:
+  back_number: 1
+  time: 2021-09-02 16:27:14
+  action: MyString
