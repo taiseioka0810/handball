@@ -1,3 +1,19 @@
 <h3>スコア編集</h3>
+    <%= form_for(@game, :url => { controller:'games', action:'update'})do |f| %>
+        <%= f.label :時間 %>
+        <%= f.text_field :time, :size => 5 %> 
+        <%= f.submit "編集する" %>
+
+        <%= f.label :背番号 %>
+        <%= f.text_field :back_number, :size => 5 %> 
+        <%= f.submit "編集する" %>
+
+        <%= f.label :アクション %>
+        <div class="field">
+            <%= f.select :action, 
+            [["得点"],["警告"],["2分間退場"],["失格"]], include_blank: "選択して下さい" %>
+        </div>
+        <%= f.submit "編集する" %>
+    <% end %>
 
 <%= link_to 'スコア経過に戻る', games_path %>

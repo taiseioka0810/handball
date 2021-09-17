@@ -37,18 +37,18 @@
     <% end %>
 
 
-    <%= form_for(@members4, :url => { controller:'ourexectives', action:'create'})do |h| %>
-        <%= h.label :役員ランク %>
+    <%= form_for(@members4, :url => { controller:'ourexectives', action:'create'})do |f| %>
+        <%= f.label :役員ランク %>
         <div class="field">
-            <%= h.select :rank, 
+            <%= f.select :rank, 
             [["A"],["B"],["C"],["D"]], include_blank: "選択して下さい" %>
         </div>
 
-        <%= h.label :役員氏名 %>
+        <%= f.label :役員氏名 %>
         <div class="field">
-            <%= h.text_field :name,size: 30%>
+            <%= f.text_field :name,size: 30%>
         </div>
-        <%= h.submit "登録"%>
+        <%= f.submit "登録"%>
     <% end %> 
 
 

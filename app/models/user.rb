@@ -4,9 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :inputs
-  has_many :ourmembers
-  has_many :ourexectives
+  has_many :inputs, dependent: :destroy
+  has_many :ourmembers, dependent: :destroy
+  has_many :ourexectives, dependent: :destroy
   
 
 end
