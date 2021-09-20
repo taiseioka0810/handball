@@ -1,4 +1,6 @@
 class InputsController < ApplicationController
+# このinputsコントローラーは使わないと思うが一応残してる
+
 before_action :authenticate_user!, only: [:index,:create]
 def create
     input = Input.new(input_params)

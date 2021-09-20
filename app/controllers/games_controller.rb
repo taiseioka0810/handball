@@ -13,7 +13,7 @@ class GamesController < ApplicationController
     input.save!
 
     game = Game.new(game_params)
-    # input.ourmember_id = current_ourmember.id
+    game.input_id = current_input.id
     game.save!
     redirect_to games_path
   end
