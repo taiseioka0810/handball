@@ -1,56 +1,26 @@
 <h1>スコア</h1>
+    <% @inputs.each do |t| %>
+        <div class="box">
+            <%= t.date%>   
+            <%= t.place%>
+            <%= t.game_name%>
+            <%= t.game_round%>
+            <%= t.gender%>
+            <%= t.age%>
+        </div>
+        <%= link_to "編集", edit_game_path(input_id: t.id) %>
+        <%= link_to "削除", game_path(input_id:t.id,id:t.id), method: :delete %>
+    <% end %>
+
+
     <% @games.each do |t| %>
         <div class="main-box">
             <div class="left-container"><%= t.time%></div>
             <div class="middle-left-container"><%= t.back_number %></div>
             <div class="middle-right-container"><%= t.action %></div>
             <div class="right-container">
-                    <%= link_to "編集", edit_game_path(t.id) %>
-                    <%= link_to "削除", game_path(t.id), method: :delete %>
-            </div>
-        </div>
-    <% end %>
-
-
-
-    <% @inputs.each do |t| %>
-        <div class="date">
-            <div class="left-container"><%= t.date%></div>
-            <div class="right-container">
-                <%= link_to "編集", edit_game_path(t.id) %>
-                <%= link_to "削除", game_path(t.id), method: :delete %>
-            </div>
-        </div>
-
-        <div class="place">
-            <div class="left-container"><%= t.place%></div>
-            <div class="right-container">
-                <%= link_to "編集", edit_game_path(t.id) %>
-                <%= link_to "削除", game_path(t.id), method: :delete %>
-            </div>
-        </div>
-
-        <div class="game_name">
-            <div class="left-container"><%= t.game_name%></div>
-            <div class="right-container">
-                <%= link_to "編集", edit_game_path(t.id) %>
-                <%= link_to "削除", game_path(t.id), method: :delete %>
-            </div>
-        </div>
-
-        <div class="date">
-            <div class="left-container"><%= t.date%></div>
-            <div class="right-container">
-                <%= link_to "編集", edit_game_path(t.id) %>
-                <%= link_to "削除", game_path(t.id), method: :delete %>
-            </div>
-        </div>
-
-        <div class="gender">
-            <div class="left-container"><%= t.gender%></div>
-            <div class="right-container">
-                <%= link_to "編集", edit_game_path(t.id) %>
-                <%= link_to "削除", game_path(t.id), method: :delete %>
+                    <%= link_to "編集", edit_game_path(game_id: t.id) %>
+                    <%= link_to "削除", game_path(game_id:t.id,id:t.id), method: :delete %>
             </div>
         </div>
     <% end %>
@@ -59,7 +29,7 @@
     <%= form_for(@input, :url => { controller:'games', action:'create'})do |f| %>
         <%= f.label :日付 %>
             <div class="field">
-                <%= f.text_field :date,size: 5%>
+                <%= f.date_field :date,size: 15%>
             </div>
         <%= f.label :場所 %>
             <div class="field">
@@ -67,21 +37,20 @@
             </div>
         <%= f.label :大会名 %>
             <div class="field">
-                <%= f.text_field :game_name,size: 15%>
+                <%= f.text_field :game_name,size: 20%>
             </div>
         <%= f.label :性別 %>
             <div class="field">
                 <%= f.select :gender, 
                 [["男"],["女"]], include_blank: "選択して下さい" %>
             </div>
-
         <%= f.label :回戦 %>
             <div class="field">
-                <%= f.text_field :game_round,size: 10%>
+                <%= f.text_field :game_round,size: 15%>
             </div>
         <%= f.label :種別 %>
             <div class="field">
-                <%= f.text_field :age,size: 10%>
+                <%= f.text_field :age,size: 15%>
             </div>
         <%= f.submit "登録"%>
     <%end%>
@@ -94,7 +63,7 @@
         </div>
         <%= f.label :背番号 %>
         <div class="field">
-            <%= f.text_field :back_number,size: 5%>
+            <%= f.number_field :back_number,size: 5%>
         </div>
         <%= f.label :アクション %>
         <div class="field">
@@ -106,6 +75,7 @@
 
 
 <%= link_to 'ホームに戻る', homes_path %>
+
 
 
 <form name="timer">

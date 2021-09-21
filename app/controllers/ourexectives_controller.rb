@@ -1,4 +1,7 @@
 class OurexectivesController < ApplicationController
+  # このコントローラーは必要ないと思うが一応残している
+
+  
     before_action :authenticate_user!, only: [:create]
     def create
         members4 = Ourexective.new(members4_params)
