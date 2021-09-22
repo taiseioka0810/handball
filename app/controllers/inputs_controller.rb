@@ -1,7 +1,5 @@
 class InputsController < ApplicationController
-# このinputsコントローラーは使わないと思うが一応残してる
-
-before_action :authenticate_user!, only: [:index,:create]
+before_action :authenticate_user!
 def create
     input = Input.new(input_params)
     input.user_id = current_user.id
@@ -33,7 +31,7 @@ end
 
 private
 def input_params
-    params.require(:input).permit(:name, :rank)
+    params.require(:input).permit(:date, :place,:game_name,:game_round,:gender,:age)
 end
 
 end

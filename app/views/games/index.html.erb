@@ -1,16 +1,15 @@
 <h1>スコア</h1>
-    <% @inputs.each do |t| %>
-        <div class="box">
-            <%= t.date%>   
-            <%= t.place%>
-            <%= t.game_name%>
-            <%= t.game_round%>
-            <%= t.gender%>
-            <%= t.age%>
-        </div>
-        <%= link_to "編集", edit_game_path(input_id: t.id) %>
-        <%= link_to "削除", game_path(input_id:t.id,id:t.id), method: :delete %>
-    <% end %>
+    <div class="box">
+        <%= @input_show.date%>   
+        <%= @input_show.place%>
+        <%= @input_show.game_name%>
+        <%= @input_show.game_round%>
+        <%= @input_show.gender%>
+        <%= @input_show.age%>
+    </div>
+    <%= link_to "編集", edit_input_path(@input_show.id) %>
+    <%= link_to "削除", input_path(@input_show.id), method: :delete %>
+
 
 
     <% @games.each do |t| %>
@@ -26,37 +25,10 @@
     <% end %>
 
 
-    <%= form_for(@input, :url => { controller:'games', action:'create'})do |f| %>
-        <%= f.label :日付 %>
-            <div class="field">
-                <%= f.date_field :date,size: 15%>
-            </div>
-        <%= f.label :場所 %>
-            <div class="field">
-                <%= f.text_field :place,size: 15%>
-            </div>
-        <%= f.label :大会名 %>
-            <div class="field">
-                <%= f.text_field :game_name,size: 20%>
-            </div>
-        <%= f.label :性別 %>
-            <div class="field">
-                <%= f.select :gender, 
-                [["男"],["女"]], include_blank: "選択して下さい" %>
-            </div>
-        <%= f.label :回戦 %>
-            <div class="field">
-                <%= f.text_field :game_round,size: 15%>
-            </div>
-        <%= f.label :種別 %>
-            <div class="field">
-                <%= f.text_field :age,size: 15%>
-            </div>
-        <%= f.submit "登録"%>
-    <%end%>
-
 
     <%= form_for(@game, :url => { controller:'games', action:'create'})do |f| %>
+        <%= f.hidden_field :input_id,value: params[:id]%>
+        
         <%= f.label :時間 %>
         <div class="field">
             <%= f.text_field :time,size: 10%>

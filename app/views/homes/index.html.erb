@@ -1,23 +1,55 @@
 <h3>ホーム</h3>
 <%= link_to "チームメンバー登録", members_path %>
-<div class="homes-container">
-  <% @homes1.each do |t| %>
+
+<%# 仮置き，スコアの画像？からリンクさせる %>
+<%= link_to 'スコア経過', games_path %>
+<%#  %>
+
+
+<div class="container">
+  <% @input_show.each do |t| %>
     <div class="home">
       <%= t.date %>
       <%= t.place %>
       <%= t.game_name %>
       <%= t.game_round %>
       <%= t.gender %>
-      <%= t.created_at %>
-      
-      <%# <%= link to "スコア詳細へ", home_path(t.id) %> 
+      <%= t.age %>
+      <%= link_to "試合経過作成", games_index_path(t.id) %> 
     </div>
   <% end %>
 </div>
 
-<%# 仮置き，スコアの画像？からリンクさせる %>
-<%= link_to 'スコア経過', games_path %>
-<%#  %>
+
+<%= form_for(@input, :url => { controller:'inputs', action:'create'})do |f| %>
+    <%= f.label :日付 %>
+        <div class="field">
+            <%= f.date_field :date,size: 15%>
+        </div>
+    <%= f.label :場所 %>
+        <div class="field">
+            <%= f.text_field :place,size: 15%>
+        </div>
+    <%= f.label :大会名 %>
+        <div class="field">
+            <%= f.text_field :game_name,size: 20%>
+        </div>
+    <%= f.label :性別 %>
+        <div class="field">
+            <%= f.select :gender, 
+            [["男"],["女"]], include_blank: "選択して下さい" %>
+        </div>
+    <%= f.label :回戦 %>
+        <div class="field">
+            <%= f.text_field :game_round,size: 15%>
+        </div>
+    <%= f.label :種別 %>
+        <div class="field">
+            <%= f.text_field :age,size: 15%>
+        </div>
+    <%= f.submit "登録"%>
+<%end%>
+
 
 <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
 

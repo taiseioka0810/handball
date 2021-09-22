@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :games
   resources :members
   resources :ourexectives
-  
+  resources :inputs
+
+  get 'games/index/:id' => 'games#index',as:'games_index'
 
   get 'statics/top' => 'statics#top'
   get 'statics/about' => 'statics#about'
