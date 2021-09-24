@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :homes
   resources :statics
   resources :games
-  resources :members
+  resources :ourmembers
   resources :ourexectives
   resources :inputs
 

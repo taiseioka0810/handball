@@ -4,9 +4,9 @@ def create
     input = Input.new(input_params)
     input.user_id = current_user.id
      if input.save
-       redirect_to games_path
+       redirect_to homes_path
      else
-       redirect_to games_path
+       redirect_to homes_path
      end    
 end
 
@@ -17,16 +17,16 @@ end
 def update
     input = Input.find(params[:id])
     if input.update(input_params)
-      redirect_to games_path, :id => input.id
+      redirect_to homes_path, :id => input.id
     else
-      redirect_to games_path
+      redirect_to homes_path
     end
 end
 
 def destroy
     input = Input.find(params[:id])
     input.destroy
-    redirect_to games_path
+    redirect_to homes_path
 end
 
 private

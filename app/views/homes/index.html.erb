@@ -1,5 +1,5 @@
 <h3>ホーム</h3>
-<%= link_to "チームメンバー登録", members_path %>
+<%= link_to "チームメンバー登録", ourmembers_path %>
 
 <%# 仮置き，スコアの画像？からリンクさせる %>
 <%= link_to 'スコア経過', games_path %>
@@ -16,6 +16,7 @@
       <%= t.gender %>
       <%= t.age %>
       <%= link_to "試合経過作成", games_index_path(t.id) %> 
+      <%= link_to "削除", input_path(t.id), method: :delete%>
     </div>
   <% end %>
 </div>
@@ -49,6 +50,31 @@
         </div>
     <%= f.submit "登録"%>
 <%end%>
+
+
+<h1>メンバー一覧</h1>
+    <% @gamemembers.each do |t| %>
+        <div class="main-box">
+            <div class="left-container"><%= t.back_number %></div>
+            <div class="middle-container"><%= t.name %></div>
+            <div class="right-container">
+                <%= link_to "編集", edit_ourmember_path(t.id) %>
+                <%= link_to "削除", ourmember_path(t.id), method: :delete %>
+            </div>
+        </div>
+    <% end %>
+
+
+    <% @gameexectives.each do |t| %>
+        <div class="main-box">
+            <div class="left-container"><%= t.rank %></div>
+            <div class="middle-container"><%= t.name %></div>
+            <div class="right-container">
+                <%= link_to "編集", edit_ourexective_path(t.id) %>
+                <%= link_to "削除", ourexective_path(t.id), method: :delete %>
+            </div>
+        </div>
+    <% end %>
 
 
 <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>

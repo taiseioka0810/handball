@@ -3,6 +3,7 @@ class GamesController < ApplicationController
     def index
       @games = Game.all
       @input_show=Input.find(params[:id])
+      # ourmember,ourexective,gamemember,gameexectiveも同上
       @game = Game.new
     end
 
@@ -19,9 +20,9 @@ class GamesController < ApplicationController
     def update
       game = Game.find(params[:id])
       if game.update(game_params)
-        redirect_to games_path, :id => game.id
+        redirect_to :action => "index", :id => game.input_id
       else
-        redirect_to games_path
+        redirect_to :action => "index"
       end
     end
 
@@ -29,7 +30,7 @@ class GamesController < ApplicationController
     def destroy
       game = Game.find(params[:id])
       game.destroy
-      redirect_to games_path
+      redirect_to :action => "index", :id => game.input_id
     end
 
 

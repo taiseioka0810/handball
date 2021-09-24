@@ -7,9 +7,8 @@
         <%= @input_show.gender%>
         <%= @input_show.age%>
     </div>
-    <%= link_to "編集", edit_input_path(@input_show.id) %>
-    <%= link_to "削除", input_path(@input_show.id), method: :delete %>
 
+<%# メンバー登録4つ inputと同じ感じかな %>
 
 
     <% @games.each do |t| %>
@@ -18,17 +17,18 @@
             <div class="middle-left-container"><%= t.back_number %></div>
             <div class="middle-right-container"><%= t.action %></div>
             <div class="right-container">
-                    <%= link_to "編集", edit_game_path(game_id: t.id) %>
-                    <%= link_to "削除", game_path(game_id:t.id,id:t.id), method: :delete %>
+                    <%= link_to "編集", edit_game_path(t.id) %>
+                    <%= link_to "削除", game_path(t.id), method: :delete %>
             </div>
         </div>
     <% end %>
 
+<%# タイムアウト追加 %>
 
 
     <%= form_for(@game, :url => { controller:'games', action:'create'})do |f| %>
         <%= f.hidden_field :input_id,value: params[:id]%>
-        
+
         <%= f.label :時間 %>
         <div class="field">
             <%= f.text_field :time,size: 10%>
@@ -44,6 +44,8 @@
         </div>
         <%= f.submit "登録"%>
     <% end %>
+
+
 
 
 <%= link_to 'ホームに戻る', homes_path %>
