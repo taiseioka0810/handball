@@ -1,8 +1,10 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!
     def index
+      @ourmembers = Ourmember.all
+      @ourexectives = Ourexective.all
       @games = Game.all
-      @input_show=Input.find(params[:id])
+      @input_show = Input.find(params[:id])
       # ourmember,ourexective,gamemember,gameexectiveも同上
       @game = Game.new
     end

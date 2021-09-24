@@ -1,57 +1,75 @@
 <h1>スコア</h1>
+  <%= link_to 'ホームに戻る', homes_path %>
+  <%= link_to 'メンバーを編集する', ourmembers_path %>
+
+  <div class="box">
+      <%= @input_show.date%>   
+      <%= @input_show.place%>
+      <%= @input_show.game_name%>
+      <%= @input_show.game_round%>
+      <%= @input_show.gender%>
+      <%= @input_show.age%>
+  </div>
+
+<%# ourmemberとourexectiveは呼び出すだけ＋（編集？）%>
+  <% @ourmembers.each do |t| %>
     <div class="box">
-        <%= @input_show.date%>   
-        <%= @input_show.place%>
-        <%= @input_show.game_name%>
-        <%= @input_show.game_round%>
-        <%= @input_show.gender%>
-        <%= @input_show.age%>
+        <%= t.back_number %>   
+        <%= t.name%>
     </div>
+  <% end %>
+
+  <% @ourexectives.each do |t| %>
+    <div class="box">
+        <%= t.rank %>   
+        <%= t.name%>
+    </div>
+  <% end %>
+
 
 <%# メンバー登録4つ inputと同じ感じかな %>
 
 
-    <% @games.each do |t| %>
-        <div class="main-box">
-            <div class="left-container"><%= t.time%></div>
-            <div class="middle-left-container"><%= t.back_number %></div>
-            <div class="middle-right-container"><%= t.action %></div>
-            <div class="right-container">
-                    <%= link_to "編集", edit_game_path(t.id) %>
-                    <%= link_to "削除", game_path(t.id), method: :delete %>
-            </div>
-        </div>
-    <% end %>
+  <% @games.each do |t| %>
+      <div class="main-box">
+          <div class="left-container"><%= t.time%></div>
+          <div class="middle-left-container"><%= t.back_number %></div>
+          <div class="middle-right-container"><%= t.action %></div>
+          <div class="right-container">
+                  <%= link_to "編集", edit_game_path(t.id) %>
+                  <%= link_to "削除", game_path(t.id), method: :delete %>
+          </div>
+      </div>
+  <% end %>
 
 <%# タイムアウト追加 %>
 
 
-    <%= form_for(@game, :url => { controller:'games', action:'create'})do |f| %>
-        <%= f.hidden_field :input_id,value: params[:id]%>
+  <%= form_for(@game, :url => { controller:'games', action:'create'})do |f| %>
+      <%= f.hidden_field :input_id,value: params[:id]%>
 
-        <%= f.label :時間 %>
-        <div class="field">
-            <%= f.text_field :time,size: 10%>
-        </div>
-        <%= f.label :背番号 %>
-        <div class="field">
-            <%= f.number_field :back_number,size: 5%>
-        </div>
-        <%= f.label :アクション %>
-        <div class="field">
-            <%= f.select :action, 
-            [["得点"],["警告"],["2分間退場"],["失格"]], include_blank: "選択して下さい" %>
-        </div>
-        <%= f.submit "登録"%>
-    <% end %>
-
-
-
-
-<%= link_to 'ホームに戻る', homes_path %>
+      <%= f.label :時間 %>
+      <div class="field">
+          <%= f.text_field :time,size: 10%>
+      </div>
+      <%= f.label :背番号 %>
+      <div class="field">
+          <%= f.number_field :back_number,size: 5%>
+      </div>
+      <%= f.label :アクション %>
+      <div class="field">
+          <%= f.select :action, 
+          [["得点"],["警告"],["2分間退場"],["失格"]], include_blank: "選択して下さい" %>
+      </div>
+      <%= f.submit "登録"%>
+  <% end %>
 
 
 
+
+
+
+<%# 以下タイマー機能 %>
 <form name="timer">
 <input type="text" value="">分
 <input type="text" value="">秒<br>

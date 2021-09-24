@@ -1,37 +1,37 @@
-class OurexectivesController < ApplicationController
+class GameexectivesController < ApplicationController
     before_action :authenticate_user!
     def create
-        ourexective = Ourexective.new(ourexective_params)
-        ourexective.user_id = current_user.id
-         if ourexective.save
-           redirect_to members_path
+        gameexective = Gameexective.new(gameexective_params)
+        gameexective.user_id = current_user.id
+         if gameexective.save
+           redirect_to ourmembers_path
          else
-           redirect_to members_path
+           redirect_to ourmembers_path
          end    
     end
 
     def edit
-        @ourexective = Ourexective.find(params[:id])
+        @gameexective = Gameexective.find(params[:id])
     end
 
     def update
-        ourexective = Ourexective.find(params[:id])
-        if ourexective.update(ourexective_params)
-          redirect_to members_path, :id => ourexective.id
+        gameexective = Gameexective.find(params[:id])
+        if gameexective.update(gameexective_params)
+          redirect_to ourmembers_path, :id => gameexective.id
         else
-          redirect_to members_path
+          redirect_to ourmembers_path
         end
     end
 
     def destroy
-        ourexective = Ourexective.find(params[:id])
-        ourexective.destroy
-        redirect_to members_path
+        gameexective = Gameexective.find(params[:id])
+        gameexective.destroy
+        redirect_to ourmembers_path
     end
 
     private
-    def ourexective_params
-        params.require(:ourexective).permit(:name, :rank)
+    def gameexective_params
+        params.require(:gameexective).permit(:name, :rank)
     end
     
 end

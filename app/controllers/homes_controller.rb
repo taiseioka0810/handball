@@ -2,7 +2,7 @@ class HomesController < ApplicationController
   before_action :authenticate_user!
   def index
     @gamemembers = Gamemember.all
-    @gameexectives = Gameexectives.all
+    @gameexectives = Gameexective.all
     @gamemember = Gamemember.new
     @gamemember = Gamemember.new
     @input_show = Input.all.where(user_id: current_user.id)

@@ -2,7 +2,7 @@
     <h3>メンバー編集</h3>
         <%= form_for(@ourmember, :url => { controller:'ourmembers', action:'update'})do |f| %>
             <%= f.label :背番号 %>
-            <%= f.text_field :back_number, :size => 5 %> 
+            <%= f.number_field :back_number, :size => 5 %> 
             <%= f.label :メンバー氏名 %>
             <%= f.text_field :name, :size => 30 %> 
             <%= f.submit "編集する" %>
