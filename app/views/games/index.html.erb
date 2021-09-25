@@ -2,6 +2,7 @@
   <%= link_to 'ホームに戻る', homes_path %>
   <%= link_to 'メンバーを編集する', ourmembers_path %>
 
+<h3>試合基本情報</h3>
   <div class="box">
       <%= @input_show.date%>   
       <%= @input_show.place%>
@@ -11,7 +12,7 @@
       <%= @input_show.age%>
   </div>
 
-<%# ourmemberとourexectiveは呼び出すだけ＋（編集？）%>
+<h3>マイチームメンバー一覧</h3>
   <% @ourmembers.each do |t| %>
     <div class="box">
         <%= t.back_number %>   
@@ -27,9 +28,9 @@
   <% end %>
 
 
-<%# メンバー登録4つ inputと同じ感じかな %>
+<%# 敵チームメンバー登録，表示と入力%>
 
-
+<h3>スコア経過</h3>
   <% @games.each do |t| %>
       <div class="main-box">
           <div class="left-container"><%= t.time%></div>
@@ -43,14 +44,25 @@
   <% end %>
 
 <%# タイムアウト追加 %>
+  <% @timeouts.each do |t| %>
+      <div class="main-box">
+          <div class="left-container"><%= t.time%></div>
+          <div class="middle-left-container"><%= t.our %></div>
+          <div class="middle-right-container"><%= t.order %></div>
+          <div class="right-container">
+                  <%= link_to "編集", edit_timeout_path(t.id) %>
+                  <%= link_to "削除", timeout_path(t.id), method: :delete %>
+          </div>
+      </div>
+  <% end %>
 
 
+<h3>スコア入力</h3>
   <%= form_for(@game, :url => { controller:'games', action:'create'})do |f| %>
       <%= f.hidden_field :input_id,value: params[:id]%>
-
       <%= f.label :時間 %>
       <div class="field">
-          <%= f.text_field :time,size: 10%>
+          <%= f.time_field :time,size: 10%>
       </div>
       <%= f.label :背番号 %>
       <div class="field">
@@ -65,11 +77,28 @@
   <% end %>
 
 
-
+<h3>タイムアウト</h3>
+  <%= form_for(@timeout, :url => { controller:'timeouts', action:'create'})do |f| %>
+      <%= f.hidden_field :input_id,value: params[:id]%>
+      <%= f.label :時間 %>
+      <div class="field">
+          <%= f.time_field :time,size: 10%>
+      </div>
+      <%= f.label :チーム %>
+      <div class="field">
+          <%= f.text_field :our,size: 5%>
+      </div>
+      <%= f.label :回数 %>
+      <div class="field">
+          <%= f.text_field :order ,size: 5%>
+      </div>
+      <%= f.submit "登録"%>
+  <% end %>
 
 
 
 <%# 以下タイマー機能 %>
+<h3>タイマー</h3>
 <form name="timer">
 <input type="text" value="">分
 <input type="text" value="">秒<br>

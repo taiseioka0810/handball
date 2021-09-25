@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :ourmembers
   resources :ourexectives
   resources :inputs
+  resources :timeouts
 
   get 'games/index/:id' => 'games#index',as:'games_index'
 

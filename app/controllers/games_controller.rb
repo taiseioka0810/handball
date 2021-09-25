@@ -4,9 +4,11 @@ class GamesController < ApplicationController
       @ourmembers = Ourmember.all
       @ourexectives = Ourexective.all
       @games = Game.all
+      @timeouts = TimeOut.all
       @input_show = Input.find(params[:id])
       # ourmember,ourexective,gamemember,gameexectiveも同上
       @game = Game.new
+      @timeout = TimeOut.new
     end
 
     def create
