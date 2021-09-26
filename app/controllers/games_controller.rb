@@ -3,10 +3,14 @@ class GamesController < ApplicationController
     def index
       @ourmembers = Ourmember.all
       @ourexectives = Ourexective.all
+      @gamemembers = Gamemember.all
+      @gameexectives = Gameexective.all
       @games = Game.all
       @timeouts = TimeOut.all
       @input_show = Input.find(params[:id])
       # ourmember,ourexective,gamemember,gameexectiveも同上
+      @gamemember = Gamemember.new
+      @gameexective = Gameexective.new
       @game = Game.new
       @timeout = TimeOut.new
     end

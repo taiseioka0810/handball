@@ -2,7 +2,7 @@ class GameexectivesController < ApplicationController
     before_action :authenticate_user!
     def create
         gameexective = Gameexective.new(gameexective_params)
-        gameexective.user_id = current_user.id
+        # gameexective.user_id = current_user.id
          if gameexective.save
            redirect_to ourmembers_path
          else

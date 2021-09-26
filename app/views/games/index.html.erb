@@ -27,8 +27,58 @@
     </div>
   <% end %>
 
-
 <%# 敵チームメンバー登録，表示と入力%>
+<h3>相手チームメンバー一覧</h3>
+  <% @gamemembers.each do |t| %>
+    <div class="box">
+        <%= t.back_number %>   
+        <%= t.name%>
+        <%= link_to "編集", edit_gamemember_path(t.id) %>
+        <%= link_to "削除", gamemember_path(t.id), method: :delete %>
+    </div>
+  <% end %>
+
+  <% @gameexectives.each do |t| %>
+    <div class="box">
+        <%= t.rank %>   
+        <%= t.name%>
+        <%= link_to "編集", edit_gameexective_path(t.id) %>
+        <%= link_to "削除", gameexective_path(t.id), method: :delete %>
+    </div>
+  <% end %>
+
+
+<h3>相手チームメンバー登録</h3>
+  <%= form_for(@gamemember, :url => { controller:'gamemembers', action:'create'})do |f| %>
+      <%= f.hidden_field :input_id,value: params[:id]%>
+
+      <%= f.label :背番号 %>
+      <div class="field">
+          <%= f.number_field :back_number,size: 5%>
+      </div>
+      <%= f.label :氏名 %>
+      <div class="field">
+          <%= f.text_field :name, size: 10%>
+      </div>
+      <%= f.submit "登録"%>
+  <% end %>
+
+
+  <%= form_for(@gameexective, :url => { controller:'gameexectives', action:'create'})do |f| %>
+      <%= f.hidden_field :input_id,value: params[:id]%>
+
+      <%= f.label :役員ランク %>
+      <div class="field">
+          <%= f.select :rank, 
+          [["A"],["B"],["C"],["D"]], include_blank: "選択して下さい" %>
+      </div>
+      <%= f.label :氏名 %>
+      <div class="field">
+          <%= f.text_field :name, size: 10%>
+      </div>
+      <%= f.submit "登録"%>
+  <% end %>
+
 
 <h3>スコア経過</h3>
   <% @games.each do |t| %>
@@ -43,7 +93,6 @@
       </div>
   <% end %>
 
-<%# タイムアウト追加 %>
   <% @timeouts.each do |t| %>
       <div class="main-box">
           <div class="left-container"><%= t.time%></div>
