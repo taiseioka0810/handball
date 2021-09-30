@@ -1,0 +1,13 @@
+<h3>タイムアウト編集</h3>
+    <%= form_for(@timeout, :url => { controller:'timeouts', action:'update'})do |f| %>
+        <%= f.label :時間 %>
+        <%= f.time_field :time, :size => 15 %> 
+        <%= f.label :回数 %>
+        <%= f.number_field :order, :size => 15 %> 
+        <%= f.label :チーム %>
+        <%= f.select :our, 
+            [["マイチーム"],["相手チーム"]], include_blank:"選択してください" %>
+        <%= f.submit "編集する" %>
+    <% end %>
+
+<%= link_to "試合経過に戻る", games_index_path %>

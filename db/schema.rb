@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_132706) do
   end
 
   create_table "gamemembers", force: :cascade do |t|
-    t.boolean "our"
+    t.boolean "our", default: false, null: false
     t.string "name"
     t.integer "back_number"
     t.datetime "created_at", precision: 6, null: false
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_132706) do
   end
 
   create_table "time_outs", force: :cascade do |t|
-    t.boolean "our"
+    t.string "our", null: false
     t.time "time"
     t.integer "order"
     t.datetime "created_at", precision: 6, null: false

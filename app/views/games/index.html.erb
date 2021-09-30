@@ -2,6 +2,7 @@
   <%= link_to 'ホームに戻る', homes_path %>
   <%= link_to 'メンバーを編集する', ourmembers_path %>
 
+
 <h3>試合基本情報</h3>
   <div class="box">
       <%= @input_show.date%>   
@@ -26,6 +27,7 @@
         <%= t.name%>
     </div>
   <% end %>
+
 
 <%# 敵チームメンバー登録，表示と入力%>
 <h3>相手チームメンバー一覧</h3>
@@ -80,6 +82,8 @@
   <% end %>
 
 
+
+
 <h3>スコア経過</h3>
   <% @games.each do |t| %>
       <div class="main-box">
@@ -93,10 +97,11 @@
       </div>
   <% end %>
 
+<h3>タイムアウト</h3>
   <% @timeouts.each do |t| %>
       <div class="main-box">
           <div class="left-container"><%= t.time%></div>
-          <div class="middle-left-container"><%= t.our %></div>
+          <div class="middle-left-container"><%= t.our%></div>
           <div class="middle-right-container"><%= t.order %></div>
           <div class="right-container">
                   <%= link_to "編集", edit_timeout_path(t.id) %>
@@ -133,16 +138,19 @@
       <div class="field">
           <%= f.time_field :time,size: 10%>
       </div>
-      <%= f.label :チーム %>
-      <div class="field">
-          <%= f.text_field :our,size: 5%>
-      </div>
       <%= f.label :回数 %>
       <div class="field">
-          <%= f.text_field :order ,size: 5%>
+          <%= f.number_field :order ,size: 5%>
+      </div>
+      <%= f.label :チーム選択 %>
+      <div class="field">
+          <%= f.select :our ,
+          [["マイチーム"],["相手チーム"]], include_blank:"選択してください" %>
       </div>
       <%= f.submit "登録"%>
   <% end %>
+
+
 
 
 

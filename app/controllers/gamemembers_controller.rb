@@ -2,11 +2,8 @@ class GamemembersController < ApplicationController
     def create
         gamemember = Gamemember.new(gamemember_params)
         # gamemember.user_id = current_user.id
-        if gamemember.save
-        redirect_to action: "index"
-        else
-        redirect_to action: "index"
-        end
+        gamemember.save!
+        redirect_to games_path, :id => gamemember.input_id
     end
 
 
@@ -18,9 +15,9 @@ class GamemembersController < ApplicationController
     def update
         gamemember = Gamemember.find(params[:id])
         if gamemember.update(gamemember_params)
-        redirect_to :action => "index", :id => gamemember.id
+        redirect_to games_path, :id => gamemember.input_id
         else
-        redirect_to :action => "index"
+        redirect_to games_path
         end
     end
 
@@ -28,12 +25,12 @@ class GamemembersController < ApplicationController
     def destroy
         gamemember = Gamemember.find(params[:id])
         gamemember.destroy
-        redirect_to action: :index
+        redirect_to games_path
     end
 
 
     private
     def gamemember_params
-        params.require(:gamemember).permit(:name, :back_number)
+        params.require(:gamemember).permit(:name, :our, :back_number, :input_id)
     end
 end
