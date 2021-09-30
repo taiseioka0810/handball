@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_16_132706) do
+ActiveRecord::Schema.define(version: 2021_09_30_121909) do
 
   create_table "gameexectives", force: :cascade do |t|
-    t.boolean "our"
+    t.string "our"
     t.string "name"
     t.string "rank"
     t.datetime "created_at", precision: 6, null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_132706) do
   end
 
   create_table "gamemembers", force: :cascade do |t|
-    t.boolean "our", default: false, null: false
+    t.string "our"
     t.string "name"
     t.integer "back_number"
     t.datetime "created_at", precision: 6, null: false
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2021_09_16_132706) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "input_id"
+    t.string "our"
   end
 
   create_table "inputs", force: :cascade do |t|

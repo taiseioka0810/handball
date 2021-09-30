@@ -15,7 +15,7 @@
     <%= form_for(@ourexective, :url => { controller:'ourexectives', action:'update'})do |f| %>
         <%= f.label :役員ランク %>
         <%= f.select :rank, 
-            [["A"],["B"],["C"],["D"]], include_blank: "選択して下さい" %>
+            [["役員A"],["役員B"],["役員C"],["役員D"]], include_blank: "選択して下さい" %>
         <%= f.label :役員氏名 %>
         <%= f.text_field :name, :size => 30 %> 
         <%= f.submit "編集する" %>

@@ -1,8 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!
     def index
-      @ourmembers = Ourmember.all
-      @ourexectives = Ourexective.all
       @gamemembers = Gamemember.all
       @gameexectives = Gameexective.all
       @games = Game.all
@@ -13,6 +11,7 @@ class GamesController < ApplicationController
       @gameexective = Gameexective.new
       @game = Game.new
       @timeout = TimeOut.new
+      @ourmembers = Ourmember.where(user_id: current_user.id)
     end
 
     def create
@@ -22,7 +21,10 @@ class GamesController < ApplicationController
     end
 
     def edit
-      @game = Game.find(params[:id])
+      @game = Game.find(params[:game_id]) if params[:game_id]
+      @timeout = TimeOut.find(params[:timeout_id]) if params[:timeout_id]
+      @gamemember = Gamemember.find(params[:gamemember_id]) if params[:gamemember_id]
+      @gameexective = Gameexective.find(params[:gameexective_id]) if params[:gameexective_id]
     end
 
     def update
@@ -44,7 +46,7 @@ class GamesController < ApplicationController
 
     private
     def game_params
-      params.require(:game).permit(:back_number, :time, :action,:input_id)
+      params.require(:game).permit(:our, :back_number, :time, :action,:input_id)
     end
 
 end

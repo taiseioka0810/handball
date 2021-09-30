@@ -3,7 +3,7 @@ class GamemembersController < ApplicationController
         gamemember = Gamemember.new(gamemember_params)
         # gamemember.user_id = current_user.id
         gamemember.save!
-        redirect_to games_path, :id => gamemember.input_id
+        redirect_to games_index_path(gamemember.input_id)
     end
 
 
@@ -15,7 +15,7 @@ class GamemembersController < ApplicationController
     def update
         gamemember = Gamemember.find(params[:id])
         if gamemember.update(gamemember_params)
-        redirect_to games_path, :id => gamemember.input_id
+        redirect_to games_index_path(gamemember.input_id)
         else
         redirect_to games_path
         end
@@ -25,7 +25,7 @@ class GamemembersController < ApplicationController
     def destroy
         gamemember = Gamemember.find(params[:id])
         gamemember.destroy
-        redirect_to games_path
+        redirect_to games_index_path(gamemember.input_id)
     end
 
 

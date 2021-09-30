@@ -13,38 +13,27 @@
       <%= @input_show.age%>
   </div>
 
-<h3>マイチームメンバー一覧</h3>
-  <% @ourmembers.each do |t| %>
-    <div class="box">
-        <%= t.back_number %>   
-        <%= t.name%>
-    </div>
-  <% end %>
 
-  <% @ourexectives.each do |t| %>
-    <div class="box">
-        <%= t.rank %>   
-        <%= t.name%>
-    </div>
-  <% end %>
 
 
 <%# 敵チームメンバー登録，表示と入力%>
 <h3>相手チームメンバー一覧</h3>
   <% @gamemembers.each do |t| %>
     <div class="box">
+        <%= t.our %>
         <%= t.back_number %>   
         <%= t.name%>
-        <%= link_to "編集", edit_gamemember_path(t.id) %>
+        <%= link_to "編集", edit_game_path(gamemember_id: t.id, id: t.id) %>
         <%= link_to "削除", gamemember_path(t.id), method: :delete %>
     </div>
   <% end %>
 
   <% @gameexectives.each do |t| %>
     <div class="box">
+        <%= t.our %>
         <%= t.rank %>   
         <%= t.name%>
-        <%= link_to "編集", edit_gameexective_path(t.id) %>
+        <%= link_to "編集", edit_game_path(gameexective_id: t.id, id: t.id) %>
         <%= link_to "削除", gameexective_path(t.id), method: :delete %>
     </div>
   <% end %>
@@ -53,14 +42,23 @@
 <h3>相手チームメンバー登録</h3>
   <%= form_for(@gamemember, :url => { controller:'gamemembers', action:'create'})do |f| %>
       <%= f.hidden_field :input_id,value: params[:id]%>
-
+      <%= f.label :チーム選択 %>
+      <div class="field">
+          <%= f.select :our ,
+          [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
+      </div>
       <%= f.label :背番号 %>
       <div class="field">
           <%= f.number_field :back_number,size: 5%>
       </div>
       <%= f.label :氏名 %>
       <div class="field">
-          <%= f.text_field :name, size: 10%>
+          <%= f.text_field :name, list:"ourmember", autocomplete:"off" %>
+          <datalist id = "ourmember">
+          <%= @ourmembers.each do |t|%>
+          <option value="<%= t.name %>"></option>
+          <% end %>
+          </datalist> 
       </div>
       <%= f.submit "登録"%>
   <% end %>
@@ -68,11 +66,15 @@
 
   <%= form_for(@gameexective, :url => { controller:'gameexectives', action:'create'})do |f| %>
       <%= f.hidden_field :input_id,value: params[:id]%>
-
+      <%= f.label :チーム選択 %>
+      <div class="field">
+          <%= f.select :our ,
+          [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
+      </div>
       <%= f.label :役員ランク %>
       <div class="field">
           <%= f.select :rank, 
-          [["A"],["B"],["C"],["D"]], include_blank: "選択して下さい" %>
+          [["役員A"],["役員B"],["役員C"],["役員D"]], include_blank: "選択して下さい" %>
       </div>
       <%= f.label :氏名 %>
       <div class="field">
@@ -84,27 +86,42 @@
 
 
 
+<%#  メンバー登録：マイメンバー呼び出し方法 %>
+form_for
+f.text_filde :~~~~~~~~~~  list: "unchi"
+<datalist id="unchi">
+@menbers.each do |m|
+  <option value="#{m.name}"></option>
+end
+</datalist>
+@menbers = Ourmnber.where(user_id: current_user.id)
+<%#  %>
+
+
+
 <h3>スコア経過</h3>
   <% @games.each do |t| %>
       <div class="main-box">
-          <div class="left-container"><%= t.time%></div>
-          <div class="middle-left-container"><%= t.back_number %></div>
+          <div class="left-container"><%= t.our %></div>
+          <div class="middle-left-container"><%= t.time %></div>
+          <div class="middle-middle-container"><%= t.back_number %></div>
           <div class="middle-right-container"><%= t.action %></div>
           <div class="right-container">
-                  <%= link_to "編集", edit_game_path(t.id) %>
+                  <%= link_to "編集", edit_game_path(game_id: t.id, id: t.id) %>
                   <%= link_to "削除", game_path(t.id), method: :delete %>
           </div>
       </div>
   <% end %>
+  <%# マイチームと相手チームで一覧表示分けてもいいかも %>
 
 <h3>タイムアウト</h3>
   <% @timeouts.each do |t| %>
       <div class="main-box">
-          <div class="left-container"><%= t.time%></div>
-          <div class="middle-left-container"><%= t.our%></div>
+          <div class="left-container"><%= t.our %></div>
+          <div class="middle-left-container"><%= t.time %></div>
           <div class="middle-right-container"><%= t.order %></div>
           <div class="right-container">
-                  <%= link_to "編集", edit_timeout_path(t.id) %>
+                  <%= link_to "編集", edit_game_path(timeout_id: t.id, id: t.id) %>
                   <%= link_to "削除", timeout_path(t.id), method: :delete %>
           </div>
       </div>
@@ -114,6 +131,11 @@
 <h3>スコア入力</h3>
   <%= form_for(@game, :url => { controller:'games', action:'create'})do |f| %>
       <%= f.hidden_field :input_id,value: params[:id]%>
+      <%= f.label :チーム選択 %>
+      <div class="field">
+          <%= f.select :our ,
+          [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
+      </div>
       <%= f.label :時間 %>
       <div class="field">
           <%= f.time_field :time,size: 10%>
@@ -134,6 +156,11 @@
 <h3>タイムアウト</h3>
   <%= form_for(@timeout, :url => { controller:'timeouts', action:'create'})do |f| %>
       <%= f.hidden_field :input_id,value: params[:id]%>
+      <%= f.label :チーム選択 %>
+      <div class="field">
+          <%= f.select :our ,
+          [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
+      </div>
       <%= f.label :時間 %>
       <div class="field">
           <%= f.time_field :time,size: 10%>
@@ -141,11 +168,6 @@
       <%= f.label :回数 %>
       <div class="field">
           <%= f.number_field :order ,size: 5%>
-      </div>
-      <%= f.label :チーム選択 %>
-      <div class="field">
-          <%= f.select :our ,
-          [["マイチーム"],["相手チーム"]], include_blank:"選択してください" %>
       </div>
       <%= f.submit "登録"%>
   <% end %>
