@@ -12,10 +12,12 @@ class HomesController < ApplicationController
 
   def show
     @input = Input.find(params[:id])
-    @gamemember = Gamemember.find(params[:id])
-    @gameexective = Gameexective.find(params[:id])
-    @game = Game.find(params[:id])
-    @timeout = TimeOut.find(params[:id])
+    @gamemember = Gamemember.all
+    @gameexective = Gameexective.all
+    @game = Game.all
+    @timeout = TimeOut.all
+    # @totalscore = Game.find
+    # ↑各選手の得点の集計出す変数
   end
 
   def edit
