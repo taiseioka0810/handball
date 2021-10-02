@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_30_121909) do
+ActiveRecord::Schema.define(version: 2021_10_01_125921) do
 
   create_table "gameexectives", force: :cascade do |t|
     t.string "our"
@@ -32,12 +32,14 @@ ActiveRecord::Schema.define(version: 2021_09_30_121909) do
 
   create_table "games", force: :cascade do |t|
     t.integer "back_number"
-    t.time "time"
+    t.integer "time_minute"
     t.string "action"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "input_id"
     t.string "our"
+    t.integer "time_second"
+    t.string "half"
   end
 
   create_table "inputs", force: :cascade do |t|
@@ -70,11 +72,12 @@ ActiveRecord::Schema.define(version: 2021_09_30_121909) do
 
   create_table "time_outs", force: :cascade do |t|
     t.string "our", null: false
-    t.time "time"
-    t.integer "order"
+    t.integer "time_minute"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "input_id"
+    t.integer "time_second"
+    t.string "half"
   end
 
   create_table "users", force: :cascade do |t|

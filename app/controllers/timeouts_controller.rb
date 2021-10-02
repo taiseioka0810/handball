@@ -31,7 +31,7 @@ class TimeoutsController < ApplicationController
     
     private
     def timeout_params
-        params.require(:time_out).permit(:time, :our, :order, :input_id)
+        params.require(:time_out).permit(:time_minute, :time_second, :our, :half, :input_id)
     end
     
 end

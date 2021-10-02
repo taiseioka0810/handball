@@ -2,7 +2,7 @@ class CreateGames < ActiveRecord::Migration[6.1]
   def change
     create_table :games do |t|
       t.integer :back_number
-      t.time :time
+      t.integer :time_minute
       t.string :action
 
       t.timestamps

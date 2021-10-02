@@ -11,13 +11,11 @@ class HomesController < ApplicationController
 
 
   def show
-    # @home1 = Input.find(params[:id])
-    # @home2 = Game.find(params[:id])
-    # @home3 = Ourmember.find(params[:id])
-    # @home4 = Ourexective.find(params[:id])
-    # @home5 = Gamemember.find(params[:id])
-    # @home6 = Gameexective.find(params[:id])
-    # @home7 = TimeOut.find(params[:id])
+    @input = Input.find(params[:id])
+    @gamemember = Gamemember.find(params[:id])
+    @gameexective = Gameexective.find(params[:id])
+    @game = Game.find(params[:id])
+    @timeout = TimeOut.find(params[:id])
   end
 
   def edit

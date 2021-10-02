@@ -45,11 +45,11 @@
       <%= f.label :チーム選択 %>
       <div class="field">
           <%= f.select :our ,
-          [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
+          [["Aチーム"],["Bチーム"]] %>
       </div>
       <%= f.label :背番号 %>
       <div class="field">
-          <%= f.number_field :back_number,size: 5%>
+          <%= f.number_field :back_number, autocomplete:"off"%>
       </div>
       <%= f.label :氏名 %>
       <div class="field">
@@ -60,6 +60,7 @@
           <% end %>
           </datalist> 
       </div>
+
       <%= f.submit "登録"%>
   <% end %>
 
@@ -69,16 +70,21 @@
       <%= f.label :チーム選択 %>
       <div class="field">
           <%= f.select :our ,
-          [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
+          [["Aチーム"],["Bチーム"]] %>
       </div>
       <%= f.label :役員ランク %>
       <div class="field">
           <%= f.select :rank, 
-          [["役員A"],["役員B"],["役員C"],["役員D"]], include_blank: "選択して下さい" %>
+          [["役員A"],["役員B"],["役員C"],["役員D"]] %>
       </div>
       <%= f.label :氏名 %>
       <div class="field">
-          <%= f.text_field :name, size: 10%>
+          <%= f.text_field :name, list:"ourexective", autocomplete:"off" %>
+          <datalist id = "ourexective">
+          <%= @ourexectives.each do |t|%>
+          <option value="<%= t.name %>"></option>
+          <% end %>
+          </datalist> 
       </div>
       <%= f.submit "登録"%>
   <% end %>
@@ -86,24 +92,13 @@
 
 
 
-<%#  メンバー登録：マイメンバー呼び出し方法 %>
-form_for
-f.text_filde :~~~~~~~~~~  list: "unchi"
-<datalist id="unchi">
-@menbers.each do |m|
-  <option value="#{m.name}"></option>
-end
-</datalist>
-@menbers = Ourmnber.where(user_id: current_user.id)
-<%#  %>
-
-
 
 <h3>スコア経過</h3>
   <% @games.each do |t| %>
       <div class="main-box">
-          <div class="left-container"><%= t.our %></div>
-          <div class="middle-left-container"><%= t.time %></div>
+          <div class="left-left-container"><%= t.half %></div>
+          <div class="left-right-container"><%= t.our %></div>
+          <div class="middle-left-container"><%= t.time_minute %>:<%= t.time_second %></div>
           <div class="middle-middle-container"><%= t.back_number %></div>
           <div class="middle-right-container"><%= t.action %></div>
           <div class="right-container">
@@ -117,9 +112,9 @@ end
 <h3>タイムアウト</h3>
   <% @timeouts.each do |t| %>
       <div class="main-box">
-          <div class="left-container"><%= t.our %></div>
-          <div class="middle-left-container"><%= t.time %></div>
-          <div class="middle-right-container"><%= t.order %></div>
+          <div class="left-left-container"><%= t.half %></div>
+          <div class="left-right-container"><%= t.our %></div>
+          <div class="middle-container"><%= t.time_minute %>:<%= t.time_second %></div>
           <div class="right-container">
                   <%= link_to "編集", edit_game_path(timeout_id: t.id, id: t.id) %>
                   <%= link_to "削除", timeout_path(t.id), method: :delete %>
@@ -131,23 +126,28 @@ end
 <h3>スコア入力</h3>
   <%= form_for(@game, :url => { controller:'games', action:'create'})do |f| %>
       <%= f.hidden_field :input_id,value: params[:id]%>
+      <%= f.label :前半・後半選択 %>
+      <div class="field">
+          <%= f.select :half ,
+          [["前半"],["後半"]] %>
+      </div>
       <%= f.label :チーム選択 %>
       <div class="field">
           <%= f.select :our ,
-          [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
+          [["Aチーム"],["Bチーム"]] %>
       </div>
       <%= f.label :時間 %>
       <div class="field">
-          <%= f.time_field :time,size: 10%>
+          <%= f.number_field :time_minute, min:0, max:30 %>:<%= f.number_field :time_second, min:00, max:59 %>
       </div>
       <%= f.label :背番号 %>
       <div class="field">
-          <%= f.number_field :back_number,size: 5%>
+          <%= f.number_field :back_number, autocomplete:"off" %>
       </div>
       <%= f.label :アクション %>
       <div class="field">
           <%= f.select :action, 
-          [["得点"],["警告"],["2分間退場"],["失格"]], include_blank: "選択して下さい" %>
+          [["得点"],["警告"],["2分間退場"],["失格"]] %>
       </div>
       <%= f.submit "登録"%>
   <% end %>
@@ -156,18 +156,19 @@ end
 <h3>タイムアウト</h3>
   <%= form_for(@timeout, :url => { controller:'timeouts', action:'create'})do |f| %>
       <%= f.hidden_field :input_id,value: params[:id]%>
+      <%= f.label :前半・後半選択 %>
+      <div class="field">
+          <%= f.select :half ,
+          [["前半"],["後半"]]  %>
+      </div>
       <%= f.label :チーム選択 %>
       <div class="field">
           <%= f.select :our ,
-          [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
+          [["Aチーム"],["Bチーム"]] %>
       </div>
       <%= f.label :時間 %>
       <div class="field">
-          <%= f.time_field :time,size: 10%>
-      </div>
-      <%= f.label :回数 %>
-      <div class="field">
-          <%= f.number_field :order ,size: 5%>
+          <%= f.number_field :time_minute %>:<%= f.number_field :time_second %>
       </div>
       <%= f.submit "登録"%>
   <% end %>

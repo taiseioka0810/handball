@@ -6,12 +6,12 @@ class GamesController < ApplicationController
       @games = Game.all
       @timeouts = TimeOut.all
       @input_show = Input.find(params[:id])
-      # ourmember,ourexective,gamemember,gameexectiveも同上
       @gamemember = Gamemember.new
       @gameexective = Gameexective.new
       @game = Game.new
       @timeout = TimeOut.new
       @ourmembers = Ourmember.where(user_id: current_user.id)
+      @ourexectives = Ourexective.where(user_id: current_user.id)
     end
 
     def create
@@ -46,7 +46,7 @@ class GamesController < ApplicationController
 
     private
     def game_params
-      params.require(:game).permit(:our, :back_number, :time, :action,:input_id)
+      params.require(:game).permit(:our, :back_number, :time_minute, :time_second, :action, :half, :input_id)
     end
 
 end
