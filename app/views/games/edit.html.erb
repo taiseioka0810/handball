@@ -10,7 +10,7 @@
         <%= f.number_field :back_number, :size => 5 %> 
         <%= f.label :アクション %>
         <%= f.select :action, 
-            [["得点"],["警告"],["2分間退場"],["失格"]], include_blank: "選択して下さい" %>
+            [["得点"],["警告"],["2分間退場"],["7mスロー得点"],["7mスロー失敗"],["失格"]], include_blank: "選択して下さい" %>
         <%= f.submit "編集する" %>
     <% end %>
 <% end %>

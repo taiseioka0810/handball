@@ -1,5 +1,89 @@
-<h3>スコア詳細</h3>
+<h1>スコア詳細</h1>
+<h3>試合基本情報</h3>
+<div class="input">
+  <%= @input.date %>
+  <%= @input.place %>
+  <%= @input.game_name %>
+  <%= @input.game_round %>
+  <%= @input.gender %>
+  <%= @input.age %>
+</div>
 
+<h3>メンバー</h3>
+<% @gamemember.each do |t| %>
+    <div class="gamemember">
+        <%= t.our %>
+        <%= t.back_number %>
+        <%= t.name %>
+    </div>
+<% end %>
+
+<h3>役員</h3>
+<% @gameexective.each do |t| %>
+    <div class="gameexective">
+        <%= t.our %>
+        <%= t.rank %>
+        <%= t.name %>
+    </div>
+<% end %>
+
+<h3>試合経過</h3>
+<% @game.each do |t| %>
+    <div class="game">
+        <%= t.half %>
+        <%= t.our %>
+        <%= t.time_minute %>:<%= t.time_second %>
+        <%= t.back_number %>
+        <%= t.action %>
+    </div>
+<% end %>
+
+
+<%# ifで表示を分ける %>
+<% if false %>
+<%= コメント %>
+<% end %>
+<%#  %>
+
+
+<h3>タイムアウト</h3>
+<% @timeout.each do |t| %>
+    <div class="timeout">
+        <%= t.half %>
+        <%= t.our %>
+        <%= t.time_minute %>:<%= t.time_second %>
+    </div>
+<% end %>
+
+
+<h3>得点集計</h3>
+<h5>Aチーム</h5>
+<div class="point">
+    <%= @a_point %>
+</div>
+<div class="faul">
+    <%= @a_faul %>
+</div>
+<div class="two_minutes_faul">
+    <%= @a_two_minutes_faul %> 
+</div> 
+<div class="exit">
+    <%= @a_exit %>
+</div>
+
+<h5>Bチーム</h5>
+<div class="point">
+    <%= @b_point %>
+</div>
+<div class="faul">
+    <%= @b_faul %>
+</div>
+<div class="two_minutes_faul">
+    <%= @b_two_minutes_faul %> 
+</div> 
+<div class="exit">
+    <%= @b_exit %>
+</div>
 
 
 

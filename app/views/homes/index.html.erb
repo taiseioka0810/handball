@@ -11,9 +11,11 @@
       <%= t.game_round %>
       <%= t.gender %>
       <%= t.age %>
-      <%= link_to "試合経過作成", games_index_path(t.id) %> 
-      <%= link_to "削除", input_path(t.id), method: :delete%>
       <%= link_to "スコア詳細", home_path(t.id) %> 
+      <%= link_to "編集する", edit_home_path(t.id) %> 
+      <%= link_to "削除", input_path(t.id), method: :delete%>
+
+      <%= link_to "試合経過作成", games_index_path(t.id) %> 
     </div>
   <% end %>
 </div>
