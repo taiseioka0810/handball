@@ -1,4 +1,5 @@
 class GamemembersController < ApplicationController
+    before_action :authenticate_user!
     def create
         gamemember = Gamemember.new(gamemember_params)
         # gamemember.user_id = current_user.id

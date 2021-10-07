@@ -1,10 +1,11 @@
+<%= stylesheet_link_tag "games", :media => "all" %>
+
 <h1>スコア</h1>
-  <%= link_to 'ホームに戻る', homes_path %>
-  <%= link_to 'メンバーを編集する', ourmembers_path %>
+<%= link_to "ログアウト",destroy_user_session_path %>
 
 
 <h3>試合基本情報</h3>
-  <div class="box">
+  <div class="input">
       <%= @input_show.date%>   
       <%= @input_show.place%>
       <%= @input_show.game_name%>
@@ -19,7 +20,7 @@
 <%# 敵チームメンバー登録，表示と入力%>
 <h3>相手チームメンバー一覧</h3>
   <% @gamemembers.each do |t| %>
-    <div class="box">
+    <div class="gamemember">
         <%= t.our %>
         <%= t.back_number %>   
         <%= t.name%>
@@ -29,7 +30,7 @@
   <% end %>
 
   <% @gameexectives.each do |t| %>
-    <div class="box">
+    <div class="gameexective">
         <%= t.our %>
         <%= t.rank %>   
         <%= t.name%>
@@ -257,3 +258,6 @@ function reSet()
 }  
   
 </script>
+
+
+

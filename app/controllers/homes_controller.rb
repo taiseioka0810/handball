@@ -41,9 +41,9 @@ class HomesController < ApplicationController
       @b_two_minutes_faul << games.where(back_number: t.back_number).where(action: "2分間退場").where(our:"Bチーム").count
       @b_exit << games.where(back_number: t.back_number).where(action: "退場").where(our:"Bチーム").count
     end 
-
   end
 
+  
   def edit
     @input = Input.find(params[:id])
   end

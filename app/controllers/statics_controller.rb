@@ -1,12 +1,15 @@
 class StaticsController < ApplicationController
 
-  def top
+  def index
+    
   end
 
   def about
+
   end
 
   def score
+    
   end
 
 end

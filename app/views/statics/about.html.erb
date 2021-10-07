@@ -1,6 +1,16 @@
-<h1>Statics#about</h1>
-<h3>スコアについて<h3>
+<h3>ハンドボールについて<h3>
+
+<p>そもそもハンドボールとは？</p>
+
+<p>ハンドボールの基本的なルール</p>
+
+<%# ここにリンク，youtube, 基本ルールが書いてあるページ %>
+<a href= "https://translate.google.co.jp/?hl=ja" >ハンドボールの動画</a>
+<a href= "https://translate.google.co.jp/?hl=ja" >基本的なルールについて詳しくはこちら</a>
 
 
-<%= link_to 'トップページ', statics_top_path %>
-<p>Find me in app/views/statics/about.html.erb</p>
+
+<%= link_to 'トップページ', statics_index_path %>
+<%= link_to "新規登録", new_user_registration_path %>
+<%= link_to "ログイン", homes_path %>
+<%= link_to "ログアウト",destroy_user_session_path %>
