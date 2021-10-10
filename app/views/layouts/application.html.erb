@@ -16,12 +16,9 @@
       <h3>ハンドボール</h3>
       <div class="header-list">
       <ul>
-        <li><%= link_to "トップページ", statics_index_path %></li>
-        <li><%= link_to "ハンドボールとは？",statics_about_path %></li>
-        <li><%= link_to "スコアについて",statics_score_path %></li>
-        <li><%= link_to "マイチームメンバー登録",ourmembers_path %></li>
-        <li><%= link_to "スコア一覧",homes_path %></li>
-        <li><%= link_to "スコアについて",statics_score_path %></li>
+        <li><%= link_to "ログイン", homes_path %></li>
+        <li><%= link_to "新規登録", new_user_registration_path %></li>
+        <li><%= link_to "ログアウト",destroy_user_session_path %></li>
       </ul>
       </div>
     </header>
@@ -33,3 +30,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
+
+<%= link_to 'トップページ', statics_index_path %>
+<%= link_to "ハンドボールとは？",statics_about_path %>
+<%= link_to "スコアについて",statics_score_path %>
+<%= link_to "スコア一覧",homes_path %>
+<%= link_to "マイチームメンバー",ourmembers_path %>
+

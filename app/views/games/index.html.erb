@@ -1,10 +1,8 @@
 <%= stylesheet_link_tag "games", :media => "all" %>
 
-<h1>スコア</h1>
-<%= link_to "ログアウト",destroy_user_session_path %>
+<h3>スコア</h3>
 
-
-<h3>試合基本情報</h3>
+<h5>試合基本情報</h5>
   <div class="input">
       <%= @input_show.date%>   
       <%= @input_show.place%>
@@ -18,7 +16,7 @@
 
 
 <%# 敵チームメンバー登録，表示と入力%>
-<h3>相手チームメンバー一覧</h3>
+<h5>ゲームメンバー一覧</h5>
   <% @gamemembers.each do |t| %>
     <div class="gamemember">
         <%= t.our %>
@@ -40,7 +38,7 @@
   <% end %>
 
 
-<h3>相手チームメンバー登録</h3>
+<h5>ゲームメンバー登録</h5>
   <%= form_for(@gamemember, :url => { controller:'gamemembers', action:'create'})do |f| %>
       <%= f.hidden_field :input_id,value: params[:id]%>
       <%= f.label :チーム選択 %>
@@ -94,7 +92,7 @@
 
 
 
-<h3>スコア経過</h3>
+<h5>スコア経過</h5>
   <% @games.each do |t| %>
       <div class="main-box">
           <div class="left-left-container"><%= t.half %></div>
@@ -110,7 +108,7 @@
   <% end %>
   <%# マイチームと相手チームで一覧表示分けてもいいかも %>
 
-<h3>タイムアウト</h3>
+<h5>タイムアウト</h5>
   <% @timeouts.each do |t| %>
       <div class="main-box">
           <div class="left-left-container"><%= t.half %></div>
@@ -124,7 +122,7 @@
   <% end %>
 
 
-<h3>スコア入力</h3>
+<h5>スコア入力</h5>
   <%= form_for(@game, :url => { controller:'games', action:'create'})do |f| %>
       <%= f.hidden_field :input_id,value: params[:id]%>
       <%= f.label :前半・後半選択 %>
@@ -154,7 +152,7 @@
   <% end %>
 
 
-<h3>タイムアウト</h3>
+<h5>タイムアウト</h5>
   <%= form_for(@timeout, :url => { controller:'timeouts', action:'create'})do |f| %>
       <%= f.hidden_field :input_id,value: params[:id]%>
       <%= f.label :前半・後半選択 %>
@@ -179,7 +177,7 @@
 
 
 <%# 以下タイマー機能 %>
-<h3>タイマー</h3>
+<h5>タイマー</h5>
 <form name="timer">
 <input type="text" value="">分
 <input type="text" value="">秒<br>
