@@ -1,261 +1,274 @@
 <%= stylesheet_link_tag "games", :media => "all" %>
 
-<h3>スコア</h3>
+<div class="container">
+    <div class="row ">
+        <div class="col">
+            <ul class="sidenav">
+                <li><a class="active" href="#top"><%= link_to 'トップページ', statics_index_path %></a></li>
+                <li><a href="#handball"><%= link_to "ハンドボールとは？",statics_about_path %></a></li>
+                <li><a href="#score"><%= link_to "スコアについて",statics_score_path %></a></li>
+                <li><a href="#score-index"><%= link_to "スコア一覧",homes_path %></a></li>
+                <li><a href="#member"><%= link_to "マイチームメンバー",ourmembers_path %></a></li>
+            <ul>
+        </div> 
 
-<h5>試合基本情報</h5>
-  <div class="input">
-      <%= @input_show.date%>   
-      <%= @input_show.place%>
-      <%= @input_show.game_name%>
-      <%= @input_show.game_round%>
-      <%= @input_show.gender%>
-      <%= @input_show.age%>
-  </div>
+        <div class="col-9">
+          <h3>スコア</h3>
+          <h5>試合基本情報</h5>
+            <div class="input">
+                <%= @input_show.date%>   
+                <%= @input_show.place%>
+                <%= @input_show.game_name%>
+                <%= @input_show.game_round%>
+                <%= @input_show.gender%>
+                <%= @input_show.age%>
+            </div>
+
+
+          <%# 敵チームメンバー登録，表示と入力%>
+          <h5>ゲームメンバー一覧</h5>
+            <% @gamemembers.each do |t| %>
+              <div class="gamemember">
+                  <%= t.our %>
+                  <%= t.back_number %>   
+                  <%= t.name%>
+                  <%= link_to "編集", edit_game_path(gamemember_id: t.id, id: t.id) %>
+                  <%= link_to "削除", gamemember_path(t.id), method: :delete %>
+              </div>
+            <% end %>
+
+            <% @gameexectives.each do |t| %>
+              <div class="gameexective">
+                  <%= t.our %>
+                  <%= t.rank %>   
+                  <%= t.name%>
+                  <%= link_to "編集", edit_game_path(gameexective_id: t.id, id: t.id) %>
+                  <%= link_to "削除", gameexective_path(t.id), method: :delete %>
+              </div>
+            <% end %>
+
+
+          <h5>ゲームメンバー登録</h5>
+            <%= form_for(@gamemember, :url => { controller:'gamemembers', action:'create'})do |f| %>
+                <%= f.hidden_field :input_id,value: params[:id]%>
+                <%= f.label :チーム選択 %>
+                <div class="field">
+                    <%= f.select :our ,
+                    [["Aチーム"],["Bチーム"]] %>
+                </div>
+                <%= f.label :背番号 %>
+                <div class="field">
+                    <%= f.number_field :back_number, autocomplete:"off"%>
+                </div>
+                <%= f.label :氏名 %>
+                <div class="field">
+                    <%= f.text_field :name, list:"ourmember", autocomplete:"off" %>
+                    <datalist id = "ourmember">
+                    <%= @ourmembers.each do |t|%>
+                    <option value="<%= t.name %>"></option>
+                    <% end %>
+                    </datalist> 
+                </div>
+
+                <%= f.submit "登録"%>
+            <% end %>
+
+
+            <%= form_for(@gameexective, :url => { controller:'gameexectives', action:'create'})do |f| %>
+                <%= f.hidden_field :input_id,value: params[:id]%>
+                <%= f.label :チーム選択 %>
+                <div class="field">
+                    <%= f.select :our ,
+                    [["Aチーム"],["Bチーム"]] %>
+                </div>
+                <%= f.label :役員ランク %>
+                <div class="field">
+                    <%= f.select :rank, 
+                    [["役員A"],["役員B"],["役員C"],["役員D"]] %>
+                </div>
+                <%= f.label :氏名 %>
+                <div class="field">
+                    <%= f.text_field :name, list:"ourexective", autocomplete:"off" %>
+                    <datalist id = "ourexective">
+                    <%= @ourexectives.each do |t|%>
+                    <option value="<%= t.name %>"></option>
+                    <% end %>
+                    </datalist> 
+                </div>
+                <%= f.submit "登録"%>
+            <% end %>
+
+
+          <h5>スコア経過</h5>
+            <% @games.each do |t| %>
+                <div class="main-box">
+                    <div class="left-left-container"><%= t.half %></div>
+                    <div class="left-right-container"><%= t.our %></div>
+                    <div class="middle-left-container"><%= t.time_minute %>:<%= t.time_second %></div>
+                    <div class="middle-middle-container"><%= t.back_number %></div>
+                    <div class="middle-right-container"><%= t.action %></div>
+                    <div class="right-container">
+                            <%= link_to "編集", edit_game_path(game_id: t.id, id: t.id) %>
+                            <%= link_to "削除", game_path(t.id), method: :delete %>
+                    </div>
+                </div>
+            <% end %>
+            <%# マイチームと相手チームで一覧表示分けてもいいかも %>
+
+          <h5>タイムアウト</h5>
+            <% @timeouts.each do |t| %>
+                <div class="main-box">
+                    <div class="left-left-container"><%= t.half %></div>
+                    <div class="left-right-container"><%= t.our %></div>
+                    <div class="middle-container"><%= t.time_minute %>:<%= t.time_second %></div>
+                    <div class="right-container">
+                            <%= link_to "編集", edit_game_path(timeout_id: t.id, id: t.id) %>
+                            <%= link_to "削除", timeout_path(t.id), method: :delete %>
+                    </div>
+                </div>
+            <% end %>
+
+
+          <h5>スコア入力</h5>
+            <%= form_for(@game, :url => { controller:'games', action:'create'})do |f| %>
+                <%= f.hidden_field :input_id,value: params[:id]%>
+                <%= f.label :前半・後半選択 %>
+                <div class="field">
+                    <%= f.select :half ,
+                    [["前半"],["後半"]] %>
+                </div>
+                <%= f.label :チーム選択 %>
+                <div class="field">
+                    <%= f.select :our ,
+                    [["Aチーム"],["Bチーム"]] %>
+                </div>
+                <%= f.label :時間 %>
+                <div class="field">
+                    <%= f.number_field :time_minute, min:0, max:30 %>:<%= f.number_field :time_second, min:00, max:59 %>
+                </div>
+                <%= f.label :背番号 %>
+                <div class="field">
+                    <%= f.number_field :back_number, autocomplete:"off" %>
+                </div>
+                <%= f.label :アクション %>
+                <div class="field">
+                    <%= f.select :action, 
+                    [["得点"],["警告"],["2分間退場"],["7mスロー得点"],["7mスロー失敗"],["失格"]] %>
+                </div>
+                <%= f.submit "登録"%>
+            <% end %>
+
+
+          <h5>タイムアウト</h5>
+            <%= form_for(@timeout, :url => { controller:'timeouts', action:'create'})do |f| %>
+                <%= f.hidden_field :input_id,value: params[:id]%>
+                <%= f.label :前半・後半選択 %>
+                <div class="field">
+                    <%= f.select :half ,
+                    [["前半"],["後半"]]  %>
+                </div>
+                <%= f.label :チーム選択 %>
+                <div class="field">
+                    <%= f.select :our ,
+                    [["Aチーム"],["Bチーム"]] %>
+                </div>
+                <%= f.label :時間 %>
+                <div class="field">
+                    <%= f.number_field :time_minute %>:<%= f.number_field :time_second %>
+                </div>
+                <%= f.submit "登録"%>
+            <% end %>
 
 
 
 
-<%# 敵チームメンバー登録，表示と入力%>
-<h5>ゲームメンバー一覧</h5>
-  <% @gamemembers.each do |t| %>
-    <div class="gamemember">
-        <%= t.our %>
-        <%= t.back_number %>   
-        <%= t.name%>
-        <%= link_to "編集", edit_game_path(gamemember_id: t.id, id: t.id) %>
-        <%= link_to "削除", gamemember_path(t.id), method: :delete %>
+
+          <%# 以下タイマー機能 %>
+          <h5>タイマー</h5>
+          <form name="timer">
+          <input type="text" value="">分
+          <input type="text" value="">秒<br>
+          <input type="button" value="スタート" onclick="cntStart()">
+          <input type="button" value="ストップ" onclick="cntStop()">
+          </form>
+
+
+          <script>
+          var timer1; //タイマーを格納する変数（タイマーID）の宣言
+
+
+          //カウントダウン関数を1000ミリ秒毎に呼び出す関数
+          function cntStart()
+          {
+            document.timer.elements[2].disabled=true;
+            timer1=setInterval("countDown()",1000);
+          }
+
+          //タイマー停止関数
+          function cntStop()
+          {
+            document.timer.elements[2].disabled=false;
+            clearInterval(timer1);
+          }
+
+          //カウントダウン関数
+          function countDown()
+          {
+            var min=document.timer.elements[0].value;
+            var sec=document.timer.elements[1].value;
+            
+            if( (min=="") && (sec=="") )
+            {
+              alert("時刻を設定してください！");
+              reSet();
+            }
+            else
+            {
+              if (min=="") min=0;
+              min=parseInt(min);
+              
+              if (sec=="") sec=0;
+              sec=parseInt(sec);
+              
+              tmWrite(min*60+sec-1);
+            }
+          }
+
+          //残り時間を書き出す関数
+          function tmWrite(int)
+          {
+            int=parseInt(int);
+            
+            if (int<=0)
+            {
+              reSet();
+              alert("時間です！");
+            }
+            else
+            {
+              //残り分数はintを60で割って切り捨てる
+              document.timer.elements[0].value=Math.floor(int/60);
+              //残り秒数はintを60で割った余り
+              document.timer.elements[1].value=int % 60;
+            }
+          }
+
+          //フォームを初期状態に戻す（リセット）関数
+          function reSet()
+          {
+            document.timer.elements[0].value="0";
+            document.timer.elements[1].value="0";
+            document.timer.elements[2].disabled=false;
+            clearInterval(timer1);
+          }  
+            
+          </script>
+        </div>
+
     </div>
-  <% end %>
-
-  <% @gameexectives.each do |t| %>
-    <div class="gameexective">
-        <%= t.our %>
-        <%= t.rank %>   
-        <%= t.name%>
-        <%= link_to "編集", edit_game_path(gameexective_id: t.id, id: t.id) %>
-        <%= link_to "削除", gameexective_path(t.id), method: :delete %>
-    </div>
-  <% end %>
+</div>  
 
 
-<h5>ゲームメンバー登録</h5>
-  <%= form_for(@gamemember, :url => { controller:'gamemembers', action:'create'})do |f| %>
-      <%= f.hidden_field :input_id,value: params[:id]%>
-      <%= f.label :チーム選択 %>
-      <div class="field">
-          <%= f.select :our ,
-          [["Aチーム"],["Bチーム"]] %>
-      </div>
-      <%= f.label :背番号 %>
-      <div class="field">
-          <%= f.number_field :back_number, autocomplete:"off"%>
-      </div>
-      <%= f.label :氏名 %>
-      <div class="field">
-          <%= f.text_field :name, list:"ourmember", autocomplete:"off" %>
-          <datalist id = "ourmember">
-          <%= @ourmembers.each do |t|%>
-          <option value="<%= t.name %>"></option>
-          <% end %>
-          </datalist> 
-      </div>
-
-      <%= f.submit "登録"%>
-  <% end %>
-
-
-  <%= form_for(@gameexective, :url => { controller:'gameexectives', action:'create'})do |f| %>
-      <%= f.hidden_field :input_id,value: params[:id]%>
-      <%= f.label :チーム選択 %>
-      <div class="field">
-          <%= f.select :our ,
-          [["Aチーム"],["Bチーム"]] %>
-      </div>
-      <%= f.label :役員ランク %>
-      <div class="field">
-          <%= f.select :rank, 
-          [["役員A"],["役員B"],["役員C"],["役員D"]] %>
-      </div>
-      <%= f.label :氏名 %>
-      <div class="field">
-          <%= f.text_field :name, list:"ourexective", autocomplete:"off" %>
-          <datalist id = "ourexective">
-          <%= @ourexectives.each do |t|%>
-          <option value="<%= t.name %>"></option>
-          <% end %>
-          </datalist> 
-      </div>
-      <%= f.submit "登録"%>
-  <% end %>
-
-
-
-
-
-<h5>スコア経過</h5>
-  <% @games.each do |t| %>
-      <div class="main-box">
-          <div class="left-left-container"><%= t.half %></div>
-          <div class="left-right-container"><%= t.our %></div>
-          <div class="middle-left-container"><%= t.time_minute %>:<%= t.time_second %></div>
-          <div class="middle-middle-container"><%= t.back_number %></div>
-          <div class="middle-right-container"><%= t.action %></div>
-          <div class="right-container">
-                  <%= link_to "編集", edit_game_path(game_id: t.id, id: t.id) %>
-                  <%= link_to "削除", game_path(t.id), method: :delete %>
-          </div>
-      </div>
-  <% end %>
-  <%# マイチームと相手チームで一覧表示分けてもいいかも %>
-
-<h5>タイムアウト</h5>
-  <% @timeouts.each do |t| %>
-      <div class="main-box">
-          <div class="left-left-container"><%= t.half %></div>
-          <div class="left-right-container"><%= t.our %></div>
-          <div class="middle-container"><%= t.time_minute %>:<%= t.time_second %></div>
-          <div class="right-container">
-                  <%= link_to "編集", edit_game_path(timeout_id: t.id, id: t.id) %>
-                  <%= link_to "削除", timeout_path(t.id), method: :delete %>
-          </div>
-      </div>
-  <% end %>
-
-
-<h5>スコア入力</h5>
-  <%= form_for(@game, :url => { controller:'games', action:'create'})do |f| %>
-      <%= f.hidden_field :input_id,value: params[:id]%>
-      <%= f.label :前半・後半選択 %>
-      <div class="field">
-          <%= f.select :half ,
-          [["前半"],["後半"]] %>
-      </div>
-      <%= f.label :チーム選択 %>
-      <div class="field">
-          <%= f.select :our ,
-          [["Aチーム"],["Bチーム"]] %>
-      </div>
-      <%= f.label :時間 %>
-      <div class="field">
-          <%= f.number_field :time_minute, min:0, max:30 %>:<%= f.number_field :time_second, min:00, max:59 %>
-      </div>
-      <%= f.label :背番号 %>
-      <div class="field">
-          <%= f.number_field :back_number, autocomplete:"off" %>
-      </div>
-      <%= f.label :アクション %>
-      <div class="field">
-          <%= f.select :action, 
-          [["得点"],["警告"],["2分間退場"],["7mスロー得点"],["7mスロー失敗"],["失格"]] %>
-      </div>
-      <%= f.submit "登録"%>
-  <% end %>
-
-
-<h5>タイムアウト</h5>
-  <%= form_for(@timeout, :url => { controller:'timeouts', action:'create'})do |f| %>
-      <%= f.hidden_field :input_id,value: params[:id]%>
-      <%= f.label :前半・後半選択 %>
-      <div class="field">
-          <%= f.select :half ,
-          [["前半"],["後半"]]  %>
-      </div>
-      <%= f.label :チーム選択 %>
-      <div class="field">
-          <%= f.select :our ,
-          [["Aチーム"],["Bチーム"]] %>
-      </div>
-      <%= f.label :時間 %>
-      <div class="field">
-          <%= f.number_field :time_minute %>:<%= f.number_field :time_second %>
-      </div>
-      <%= f.submit "登録"%>
-  <% end %>
-
-
-
-
-
-<%# 以下タイマー機能 %>
-<h5>タイマー</h5>
-<form name="timer">
-<input type="text" value="">分
-<input type="text" value="">秒<br>
-<input type="button" value="スタート" onclick="cntStart()">
-<input type="button" value="ストップ" onclick="cntStop()">
-</form>
-
-
-<script>
-var timer1; //タイマーを格納する変数（タイマーID）の宣言
-
-
-//カウントダウン関数を1000ミリ秒毎に呼び出す関数
-function cntStart()
-{
-  document.timer.elements[2].disabled=true;
-  timer1=setInterval("countDown()",1000);
-}
-
-//タイマー停止関数
-function cntStop()
-{
-  document.timer.elements[2].disabled=false;
-  clearInterval(timer1);
-}
-
-//カウントダウン関数
-function countDown()
-{
-  var min=document.timer.elements[0].value;
-  var sec=document.timer.elements[1].value;
-  
-  if( (min=="") && (sec=="") )
-  {
-    alert("時刻を設定してください！");
-    reSet();
-  }
-  else
-  {
-    if (min=="") min=0;
-    min=parseInt(min);
-    
-    if (sec=="") sec=0;
-    sec=parseInt(sec);
-    
-    tmWrite(min*60+sec-1);
-  }
-}
-
-//残り時間を書き出す関数
-function tmWrite(int)
-{
-  int=parseInt(int);
-  
-  if (int<=0)
-  {
-    reSet();
-    alert("時間です！");
-  }
-  else
-  {
-    //残り分数はintを60で割って切り捨てる
-    document.timer.elements[0].value=Math.floor(int/60);
-    //残り秒数はintを60で割った余り
-    document.timer.elements[1].value=int % 60;
-  }
-}
-
-//フォームを初期状態に戻す（リセット）関数
-function reSet()
-{
-  document.timer.elements[0].value="0";
-  document.timer.elements[1].value="0";
-  document.timer.elements[2].disabled=false;
-  clearInterval(timer1);
-}  
-  
-</script>
 
 
 

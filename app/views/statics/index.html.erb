@@ -1,7 +1,52 @@
-<h3>トップページ</h3>
 
+<section id="first-block">
+<p>handball</p>
+</section>
 
-<p>サイトの説明</p>
+<section id="second-block">
+    <div class="container">
+        <div class="row justify-content-around">
+            <div class="col-3">
+                <div class="card" style="width: 18rem; height:25rem;">
+                <h5 class="card-header">ハンドボールとは</h5>
+                <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">そもそもハンドボールって何？って思われる人が多いと思います（このサイトを利用する人には経験者か関係者しかいないと思いますが．．．）．</p>
+                        <p class="card-text">念のため，ハンドボールの基本的なルールなど簡単にですが説明します！</p>
+                        <p class="card-text">詳しくは以下のボタンをクリック</p>
+                        <%= link_to "ハンドボールについて",statics_about_path, class:"btn btn-primary" %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="card" style="width: 18rem; height:25rem;">
+                <h5 class="card-header">スコアについて</h5>
+                <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">ハンドボールのスコアって非常にわかりづらく，書き方が難しいです😢</p>
+                        <p class="card-text">詳しくは以下のボタンをクリック</p>
+                        <%= link_to "スコアについて",statics_score_path, class:"btn btn-primary" %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="card" style="width: 18rem; height:25rem;">
+                <h5 class="card-header">スコア作成</h5>
+                <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-text">実際にスコアを作成する</p>
+                        <p class="card-text">以下のボタンをクリック</p>
+                        <%= link_to "スコア作成（一覧）", homes_path,class:"btn btn-primary" %>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 
 
 

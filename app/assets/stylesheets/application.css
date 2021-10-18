@@ -3,31 +3,30 @@
     padding: 0;
     margin: 0;
   }
+  
+
+  
+  @import url('https://fonts.googleapis.com/css?family=Sawarabi+Mincho');
   body {
     min-height: 100vh;
     position: relative; 
-    font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ",
-      Meiryo, "ＭＳ Ｐゴシック", sans-serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    font-family: 'Sawarabi Mincho', sans-serif;
   }
+
+  /* ヘッダー */
   header {
     background-color: #96FAEB;
     height: 60px;
     font-weight: bold;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: flex-end;
   }
   header a {
     color: black; 
     text-decoration: none; 
-  }
-  header h3 {
-    margin-left: 20px;
-    font-weight: bold;
-    color: black;
   }
   .header-list {
     display: flex;
@@ -40,4 +39,82 @@
     list-style: none;
     margin-right: 20px;
   }
+  /* ヘッダー終わり */
+
+
+  main{
+    margin-top:20px;
+  }
+  /* 左右分割 */
+  @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+  .col-9{
+    margin-left:10px;
+    background-color:#b3d874;
+    height:auto;
+    font-family: 'Ubuntu Mono', monospace;
+  }
+ 
+  .col{
+    margin:0;
+    padding:0;
+  }
+ 
+  .sidenav {
+    border: 5px solid #96FAEB;
+    border-radius: 10px;
+  }
+  /* 終わり */
+ 
+ 
+  /* サイドバーの補助デザイン */
+  ul.sidenav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: relative;
+    overflow: auto;
+  }
+  ul.sidenav li a {
+    display: block;
+    color: #000000;
+    padding: 0px 16px;
+    text-decoration: none;
+  }
+  ul.sidenav li a.active {
+    color: white;
+  }
+  ul.sidenav li a:hover:not(.active) {
+    background-color: #1b2538;
+    color: white;
+  }
+  div.content {
+    margin-left: 25%;
+    padding: 1px 16px;
+    height: 1000px;
+  }
+  @media screen and (max-width: 900px) {
+    ul.sidenav {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    ul.sidenav li a {
+      float: left;
+      padding: 15px;
+    }
+    div.content {
+      margin-left: 0;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    ul.sidenav li a {
+      text-align: center;
+      float: none;
+    }
+  }
+  /* 終わり */
+
+
   

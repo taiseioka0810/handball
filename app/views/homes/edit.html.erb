@@ -1,29 +1,43 @@
-<h3>基本情報編集</h3>
-    <%= form_for(@input, :url => { controller:'inputs', action:'update'})do |f| %>
-        <%= f.label :日付 %>
-        <%= f.text_field :date, :size => 5 %> 
+<div class="container">
+    <div class="row ">
+        <div class="col">
+            <ul class="sidenav">
+                <li><a class="active" href="#top"><%= link_to 'トップページ', statics_index_path %></a></li>
+                <li><a href="#handball"><%= link_to "ハンドボールとは？",statics_about_path %></a></li>
+                <li><a href="#score"><%= link_to "スコアについて",statics_score_path %></a></li>
+                <li><a href="#score-index"><%= link_to "スコア一覧",homes_path %></a></li>
+                <li><a href="#member"><%= link_to "マイチームメンバー",ourmembers_path %></a></li>
+            <ul>
+        </div> 
 
-        <%= f.label :場所 %>
-        <%= f.text_field :place, :size => 5 %> 
+        <div class="col-9">
+            <h3>基本情報編集</h3>
+            <%= form_for(@input, :url => { controller:'inputs', action:'update'})do |f| %>
+                <%= f.label :日付 %>
+                <%= f.text_field :date, :size => 5 %> 
 
-        <%= f.label :大会名 %>
-        <%= f.text_field :game_name, :size => 5 %> 
+                <%= f.label :場所 %>
+                <%= f.text_field :place, :size => 5 %> 
 
-        <%= f.label :性別 %>
-        <div class="field">
-            <%= f.select :gender, 
-            [["男"],["女"]], include_blank: "選択して下さい" %>
+                <%= f.label :大会名 %>
+                <%= f.text_field :game_name, :size => 5 %> 
+
+                <%= f.label :性別 %>
+                <div class="field">
+                    <%= f.select :gender, 
+                    [["男"],["女"]], include_blank: "選択して下さい" %>
+                </div>
+
+                <%= f.label :回戦%>
+                <%= f.text_field :game_round, :size => 5 %> 
+
+                <%= f.label :種別 %>
+                <%= f.text_field :age, :size => 5 %> 
+
+                <%= f.submit "編集する" %>
+            <% end %>
         </div>
 
-        <%= f.label :回戦%>
-        <%= f.text_field :game_round, :size => 5 %> 
-
-        <%= f.label :種別 %>
-        <%= f.text_field :age, :size => 5 %> 
-
-        <%= f.submit "編集する" %>
-    <% end %>
-    
-    
-<%= link_to 'ホームに戻る', homes_path %>
+    </div>
+</div>  
 
