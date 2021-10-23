@@ -1,0 +1,50 @@
+.col-9 h3{
+    text-align:center;
+    font-family:cursive;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.member1{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+}
+.member1-submit{
+    display:flex;
+    flex-direction:row;
+    justify-content: flex-end;
+    margin-bottom:20px;
+}
+
+.member2{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+}
+
+.member2-submit{
+    display:flex;
+    flex-direction:row;
+    justify-content: flex-end;
+    margin-bottom:20px;
+}
+
+.col-md{
+    text-align:center;
+    margin:30px;
+}
+
+
+.middle-container{
+    margin-right:20px;
+}
+
+
+
+
+
+
+input[type="number"]{
+    width: 60px;;
+}

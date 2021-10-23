@@ -1,0 +1,66 @@
+.col-9{
+    
+}
+
+.col-9 h3{
+    text-align: center;
+    font-weight: bold;
+    margin: 20px;
+    font-family:cursive;
+}
+
+.input{
+    border-radius: 15px;
+    margin:20px;
+    background-color: #D0F5DF;
+    font-weight: bold;
+    font-size: large;
+
+}
+.input1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+.input2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+.input3{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    font-size: large;
+}
+
+.home{
+    margin:20px;
+    font-weight: bold;
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content: space-around;
+    text-align:center;
+}
+
+.home1{
+    margin-top:20px;
+    width: 300px;
+    height: auto;
+    border:5px solid black;
+}
+.home2{
+    margin:10px;
+}
+.home2-end{
+    margin-top:20px;
+}
+
+input[type="text"]{
+    width: 100px;;
+    height: 25px;
+}
+

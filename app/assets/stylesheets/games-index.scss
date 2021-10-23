@@ -1,0 +1,171 @@
+.col-9 h3{
+    text-align: center;
+    font-weight: bold;
+    margin: 20px;
+    font-family:cursive;
+}
+.col-9 h5{
+    text-align:center;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+.input{
+    text-align:center;
+    font-size:20px;
+    margin:20px;
+}
+.col-3{
+    text-align:center;
+}
+// タイマー
+.timer{
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    font-size: 12px;
+}
+.button{
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+.start{
+    margin-right:20px;
+}
+// 
+
+// メンバー表示
+.member{
+    margin-top:70px;
+}
+.gamemember-table{
+    font-size:12px;
+    text-align:center;
+}
+.gameexective-table{
+    font-size:12px;
+    text-align:center;
+}
+table{
+    margin-top: 20px;
+    margin-bottom:20px;
+}
+
+// 
+
+
+// スコア入力
+.score-input{
+    font-size:14px;
+}
+.score-input1{
+    display:flex;
+    flex-direction:row;
+    margin-bottom:10px;
+    
+}
+.score-input1-1{
+    margin-right:10px;
+}
+
+.score-input2{
+    display:flex;
+    flex-direction:row;
+    margin-top:10px;
+    
+}
+.score-input2-1{
+    margin-right:10px;
+}
+
+.score-input3{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.score-input4{
+    margin-right:20px;
+    text-align:right;
+}
+// 
+
+// メンバー入力
+.gamemember-input{
+    font-size:14px;
+}
+.gamemember-input1{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    margin-bottom:10px;
+
+}
+.gamemember-input2{
+    margin-bottom:10px;
+}
+.gamemember-input3{
+    margin-right:20px;
+    text-align:right;
+}
+
+.gameexective-input{
+    font-size:14px;
+}
+.gameexective-input1{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    margin-bottom:10px;
+
+}
+.gameexective-input2{
+    margin-bottom:10px;
+}
+.gameexective-input3{
+    margin-right:20px;
+    text-align:right;
+}
+// 
+
+
+// タイムアウト入力
+.timeout-input{
+    font-size:14px;
+}
+.timeout-input1{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    margin-bottom:10px;
+}
+.timeout-input2{
+    margin-bottom:10px;
+}
+.timeout-input3{
+    margin-right:20px;
+    text-align:right;
+}
+
+// 
+
+
+// スコア表示
+.score-table{
+    font-size:12px;
+    text-align:center;
+}
+table{
+    margin-top: 20px;
+    margin-bottom:20px;
+}
+
+
+
+input[type="number"]{
+    width: 40px;
+}
+input[type="text"]{
+    width: 150px;
+}
+

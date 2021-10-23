@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'homes-index', :media => "all" %>
+
 <div class="container">
     <div class="row ">
         <div class="col">
@@ -9,52 +11,68 @@
                 <li><a href="#member"><%= link_to "マイチームメンバー",ourmembers_path %></a></li>
             <ul>
         </div> 
+
         <div class="col-9">
             <h3>ホーム</h3>
-            <% @input_show.each do |t| %>
-                <div class="home">
-                    <%= t.date %>
-                    <%= t.place %>
-                    <%= t.game_name %>
-                    <%= t.game_round %>
-                    <%= t.gender %>
-                    <%= t.age %>
-                    <%= link_to "スコア詳細", home_path(t.id) %> 
-                    <%= link_to "編集する", edit_home_path(t.id) %> 
-                    <%= link_to "削除", input_path(t.id), method: :delete, class:"btn btn-danger"%>
-                    <%= link_to "試合経過作成", games_index_path(t.id), class:"btn btn-outline-primary" %> 
+            <div class="input">
+                <%= form_for(@input, :url => { controller:'inputs', action:'create'})do |f| %>
+                <div class="input1">
+                    <%= f.label :日付 %>
+                        <div class="field">
+                            <%= f.date_field :date,size: 15%>
+                        </div>
+                    <%= f.label :場所 %>
+                        <div class="field">
+                            <%= f.text_field :place,size: 15%>
+                        </div>
+                    <%= f.label :大会名 %>
+                        <div class="field">
+                            <%= f.text_field :game_name,size: 20%>
+                        </div>
                 </div>
-            <% end %>
+                <div class="input2">
+                    <%= f.label :性別 %>
+                        <div class="field">
+                            <%= f.select :gender, 
+                            [["男"],["女"]], include_blank: "選択して下さい" %>
+                        </div>
+                    <%= f.label :回戦 %>
+                        <div class="field">
+                            <%= f.text_field :game_round,size: 15%>
+                        </div>
+                    <%= f.label :種別 %>
+                        <div class="field">
+                            <%= f.text_field :age,size: 15%>
+                        </div>
+                </div>
+                <div class="input3">
+                    <%= f.submit "登録"%>
+                </div>
+                <%end%>
+            </div>
 
+            <div class="home">
+                <% @input_show.each do |t| %>
+                    <div class="home1">
+                        <%= t.date %>
+                        <%= t.place %>
+                        <%= t.game_name %>
+                        <%= t.game_round %>
+                        <%= t.gender %>
+                        <%= t.age %>
+                        <div class="home2">
+                            <%= link_to "編集する", edit_home_path(t.id) %> 
+                            <%= link_to "スコア詳細", home_path(t.id) %> 
+                            
+                            <div class="home2-end">
+                                <%= link_to "試合経過作成", games_index_path(t.id), class:"btn btn-outline-primary" %> 
+                                <%= link_to "削除", input_path(t.id), method: :delete, class:"btn btn-danger"%>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
 
-            <%= form_for(@input, :url => { controller:'inputs', action:'create'})do |f| %>
-                <%= f.label :日付 %>
-                    <div class="field">
-                        <%= f.date_field :date,size: 15%>
-                    </div>
-                <%= f.label :場所 %>
-                    <div class="field">
-                        <%= f.text_field :place,size: 15%>
-                    </div>
-                <%= f.label :大会名 %>
-                    <div class="field">
-                        <%= f.text_field :game_name,size: 20%>
-                    </div>
-                <%= f.label :性別 %>
-                    <div class="field">
-                        <%= f.select :gender, 
-                        [["男"],["女"]], include_blank: "選択して下さい" %>
-                    </div>
-                <%= f.label :回戦 %>
-                    <div class="field">
-                        <%= f.text_field :game_round,size: 15%>
-                    </div>
-                <%= f.label :種別 %>
-                    <div class="field">
-                        <%= f.text_field :age,size: 15%>
-                    </div>
-                <%= f.submit "登録"%>
-            <%end%>
         </div>
 
     </div>
