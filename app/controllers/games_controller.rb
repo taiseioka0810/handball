@@ -12,7 +12,10 @@ class GamesController < ApplicationController
       @timeout = TimeOut.new
       @ourmembers = Ourmember.where(user_id: current_user.id)
       @ourexectives = Ourexective.where(user_id: current_user.id)
-    end
+      
+
+  
+      end
 
     def create
       game = Game.new(game_params)

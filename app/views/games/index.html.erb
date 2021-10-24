@@ -128,7 +128,7 @@
                 <tr>
                   <td width="10%"><%= t.back_number %></td>
                   <td><%= t.name%></td>
-                  <td>
+                  <td width="40%">
                     <%= link_to "編集", edit_game_path(gamemember_id: t.id, id: t.id) %>
                     <%= link_to "削除", gamemember_path(t.id), method: :delete %>
                   </td>
@@ -147,7 +147,7 @@
                 <tr>
                   <td width="10%"><%= t.back_number %></td>
                   <td><%= t.name%></td>
-                  <td>
+                  <td width="40%">
                     <%= link_to "編集", edit_game_path(gamemember_id: t.id, id: t.id) %>
                     <%= link_to "削除", gamemember_path(t.id), method: :delete %>
                   </td>
@@ -167,9 +167,9 @@
                 </tr>
                 <% @gameexectives.where(our: "Aチーム").each do |t| %>
                 <tr>
-                  <td width="25%"><%= t.rank %> </td>
+                  <td width="10%"><%= t.rank %> </td>
                   <td><%= t.name%></td>
-                  <td>
+                  <td width="40%">
                     <%= link_to "編集", edit_game_path(gameexective_id: t.id, id: t.id) %>
                     <%= link_to "削除", gameexective_path(t.id), method: :delete %>
                   </td>
@@ -185,9 +185,9 @@
                 </tr>
                 <% @gameexectives.where(our: "Bチーム").each do |t| %>
                 <tr>
-                  <td width="25%"><%= t.rank %> </td>
+                  <td width="10%"><%= t.rank %> </td>
                   <td><%= t.name%></td>
-                  <td>
+                  <td width="40%">
                     <%= link_to "編集", edit_game_path(gameexective_id: t.id, id: t.id) %>
                     <%= link_to "削除", gameexective_path(t.id), method: :delete %>
                   </td>
@@ -320,6 +320,7 @@
               </div>
               <% end %>
 
+
               <h7>役員登録</h7>
               <%= form_for(@gameexective, :url => { controller:'gameexectives', action:'create'})do |f| %>
               <div class="gameexective-input">
@@ -380,79 +381,169 @@
                   <th>得点</th>
                   <th>結果</th>
                   <th>番号</th>
-                  <th>編集</th>
+                  <th></th>
                 </tr>
                   
-                    <% @games.order("time_minute asc").where(half: "前半").each do |t| %>
-                      <% if @games.where(our: "Aチーム")%>
-                      <tr>
-                          <td><%= t.back_number %></td>
-                          <td><%= t.action %></td>
-                          <td>得点</td>
-                          <td><%= t.time_minute %>:<%= t.time_second %></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td>
-                            <%= link_to "編集", edit_game_path(game_id: t.id, id: t.id) %>
-                            <%= link_to "削除", game_path(t.id), method: :delete %>
-                          </td>
-                      </tr>
-                      <% end %>
+                <% a_point = 0 %>
+                <% b_point = 0 %>
+                <% @games.order("time_minute asc").where(half: "前半").each do |t| %>
+                  <% if t.our =="Aチーム"%>
+                  <tr>
+                      <td width="5%"><%= t.back_number %></td>
+                      <td width="20%"><%= t.action %></td>
+                      <td width="5%">
+                        <% if t.action == "得点"  %> 
+                          <% a_point += 1 %>
+                          <%= a_point %>
+                        <% end %>
+                      </td>
+                      <td width="20%"><%= t.time_minute %>:<%= t.time_second %></td>
+                      <td width="5%"></td>
+                      <td width="20%"></td>
+                      <td width="5%"></td>
+                      <td width="20%">
+                        <%= link_to "編集", edit_game_path(game_id: t.id, id: t.id) %>
+                        <%= link_to "削除", game_path(t.id), method: :delete %>
+                      </td>
+                  </tr>
+                  <% end %>
 
-                      <% if @games.where(our: "Bチーム")%>
-                      <tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td><%= t.time_minute %>:<%= t.time_second %></td>
-                          <td>得点</td>
-                          <td><%= t.action %></td>
-                          <td><%= t.back_number %></td>
-                          <td>
-                            <%= link_to "編集", edit_game_path(game_id: t.id, id: t.id) %>
-                            <%= link_to "削除", game_path(t.id), method: :delete %>
-                          </td>
-                      </tr>
-                      <% end %>
-                    <% end %>
-                  
-
-                  
-                    
-                 
-                 
-                
+                  <% if t.our=="Bチーム"%>
+                  <tr>
+                      <td width="5%"></td>
+                      <td width="20%"></td>
+                      <td width="5%"></td>
+                      <td width="20%"><%= t.time_minute %>:<%= t.time_second %></td>
+                      <td width="5%">
+                        <% if t.action == "得点" %> 
+                          <% b_point += 1 %>
+                          <%= b_point %>
+                        <% end %>
+                      </td>
+                      <td width="20%"><%= t.action %></td>
+                      <td width="5%"><%= t.back_number %></td>
+                      <td width="20%">
+                        <%= link_to "編集", edit_game_path(game_id: t.id, id: t.id) %>
+                        <%= link_to "削除", game_path(t.id), method: :delete %>
+                      </td>
+                  </tr>
+                  <% end %>
+                <% end %>
               </table>
 
-              <% @games.each do |t| %>
-                  <div class="main-box">
-                      <div class="left-left-container"><%= t.half %></div>
-                      <div class="left-right-container"><%= t.our %></div>
-                      <div class="middle-left-container"></div>
-                      <div class="middle-middle-container"></div>
-                      <div class="middle-right-container"></div>
-                      <div class="right-container">
-                      </div>
-                  </div>
-              <% end %>
-              <%# マイチームと相手チームで一覧表示分けてもいいかも %>
+
+              <h7>後半</h7>
+              <table class="score-table" border="1" width="100%">
+                <tr>
+                  <th>番号</th>
+                  <th>結果</th>
+                  <th>得点</th>
+                  <th>時間</th>
+                  <th>得点</th>
+                  <th>結果</th>
+                  <th>番号</th>
+                  <th></th>
+                </tr>
+                  
+                <% @games.order("time_minute asc").where(half: "後半").each do |t| %>
+                  <% if t.our =="Aチーム"%>
+                  <tr>
+                      <td width="5%"><%= t.back_number %></td>
+                      <td width="20%"><%= t.action %></td>
+                      <td width="5%">
+                        <% if t.action == "得点" %> 
+                          <% a_point += 1 %>
+                          <%= a_point %>
+                        <% end %>
+                      </td>
+                      <td width="20%"><%= t.time_minute %>:<%= t.time_second %></td>
+                      <td width="5%"></td>
+                      <td width="20%"></td>
+                      <td width="5%"></td>
+                      <td width="20%">
+                        <%= link_to "編集", edit_game_path(game_id: t.id, id: t.id) %>
+                        <%= link_to "削除", game_path(t.id), method: :delete %>
+                      </td>
+                  </tr>
+                  <% end %>
+
+                  <% if t.our=="Bチーム"%>
+                  <tr>
+                      <td width="5%"></td>
+                      <td width="20%"></td>
+                      <td width="5%"></td>
+                      <td width="20%"><%= t.time_minute %>:<%= t.time_second %></td>
+                      <td width="5%" >
+                        <% if t.action == "得点" %> 
+                          <% b_point += 1 %>
+                          <%= b_point %>
+                        <% end %>
+                      </td>
+                      <td width="20%"><%= t.action %></td>
+                      <td width="5%"><%= t.back_number %></td>
+                      <td width="20%">
+                        <%= link_to "編集", edit_game_path(game_id: t.id, id: t.id) %>
+                        <%= link_to "削除", game_path(t.id), method: :delete %>
+                      </td>
+                  </tr>
+                  <% end %>
+                <% end %>
+              </table>
+
+              
 
               <h5>タイムアウト</h5>
-              <% @timeouts.each do |t| %>
-                  <div class="main-box">
-                      <div class="left-left-container"><%= t.half %></div>
-                      <div class="left-right-container"><%= t.our %></div>
-                      <div class="middle-container"><%= t.time_minute %>:<%= t.time_second %></div>
-                      <div class="right-container">
-                              <%= link_to "編集", edit_game_path(timeout_id: t.id, id: t.id) %>
-                              <%= link_to "削除", timeout_path(t.id), method: :delete %>
-                      </div>
-                  </div>
-              <% end %>
-            </div>
-          </div>
-          <%# メインボックスのcol %>
+              <h7>Aチーム</h7>
+              <div class="timeoutA-table">
+                <table class="timeoutA-table1" border="1" width="100%">
+                  <tr>
+                    <th style="height:20px;">前半</th>
+                  </tr>
+                  <% @timeouts.order("time_minute asc").where(our: "Aチーム", half:"前半").each do |t| %>
+                  <tr>
+                    <td><%= t.time_minute %>:<%= t.time_second %></td>
+                  </tr>
+                  <% end %>
+                </table>
+
+                <table class="timeoutA-table2" border="1" width="100%">
+                  <tr>
+                    <th style="height:20px;">後半</th>
+                  </tr>
+                  <% @timeouts.order("time_minute asc").where(our: "Aチーム",half:"後半").each do |t| %>
+                  <tr>
+                    <td><%= t.time_minute %>:<%= t.time_second %></td>
+                  </tr>
+                  <% end %>
+                </table>
+              </div>
+              
+
+              <h7>Bチーム</h7>
+              <div class="timeoutB-table">
+                <table class="timeoutB-table1" border="1" width="100%">
+                  <tr>
+                    <th style="height:20px;">前半</th>
+                  </tr>
+                  <% @timeouts.order("time_minute asc").where(our: "Bチーム", half:"前半").each do |t| %>
+                  <tr>
+                    <td><%= t.time_minute %>:<%= t.time_second %></td>
+                  </tr>
+                  <% end %>
+                </table>
+
+                <table class="timeoutB-table2" border="1" width="100%">
+                  <tr>
+                    <th style="height:20px;">後半</th>
+                  </tr>
+                  <% @timeouts.order("time_minute asc").where(our: "Bチーム",half:"後半").each do |t| %>
+                  <tr>
+                    <td><%= t.time_minute %>:<%= t.time_second %></td>
+                  </tr>
+                  <% end %>
+                </table>
+              </div>
+
 
 
         </div>

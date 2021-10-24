@@ -1,3 +1,6 @@
+<%= stylesheet_link_tag "homes-show", :media => "all" %>
+
+
 <div class="container">
     <div class="row ">
         <div class="col">
@@ -11,92 +14,413 @@
         </div> 
 
         <div class="col-9">
-            <h1>スコア詳細</h1>
-            <h3>試合基本情報</h3>
+            <h3>スコア詳細</h3>
             <div class="input">
-                <%= @input.date %>
-                <%= @input.place %>
-                <%= @input.game_name %>
-                <%= @input.game_round %>
-                <%= @input.gender %>
-                <%= @input.age %>
-            </div>
-
-            <h3>メンバー</h3>
-            <% @gamemember.each do |t| %>
-                <div class="gamemember">
-                    <%= t.our %>
-                    <%= t.back_number %>
-                    <%= t.name %>
+                <h5>試合基本情報</h5>
+                <div class="input1">
+                    <%= @input.date %>
+                    <%= @input.place %>
+                    <%= @input.game_name %>
+                    <%= @input.game_round %>
+                    <%= @input.gender %>
+                    <%= @input.age %>
                 </div>
-            <% end %>
+            </div>
+            
+            <div class="row justify-content-around">
+                <div class="col-5"> 
+                    <div class="member">
+                        <h5>メンバー</h5>
+                        <h7>Aチーム</h7>
+                        <table class="gamemember-table" border="1" width="100%">
+                            <tr>
+                                <th>背番号</th>
+                                <th>名前</th>
+                                <th>前半</th>
+                                <th>後半</th>
+                                <th>警告</th>
+                                <th>退場</th>
+                                <th>失格</th>
+                            </tr>
+                            <% @gamemember.where(our: "Aチーム").each do |t| %>
+                            <tr>
+                                <td width="10%"><%= t.back_number %></td>
+                                <td style="width:100px;"><%= t.name%></td>
+                                <td><%= @a_point %></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <% end %>
+                        </table>
 
-            <h3>役員</h3>
-            <% @gameexective.each do |t| %>
-                <div class="gameexective">
-                    <%= t.our %>
-                    <%= t.rank %>
-                    <%= t.name %>
+                        <h7>Bチーム</h7>
+                        <table class="gamemember-table" border="1" width="100%">
+                            <tr>
+                                <th>背番号</th>
+                                <th>名前</th>
+                                <th>前半</th>
+                                <th>後半</th>
+                                <th>警告</th>
+                                <th>退場</th>
+                                <th>失格</th>
+                            </tr>
+                            <% @gamemember.where(our: "Bチーム").each do |t| %>
+                            <tr>
+                                <td width="10%"><%= t.back_number %></td>
+                                <td style="width:100px;"><%= t.name%></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <% end %>
+                        </table>
+                        
+                        <h5>役員</h5>
+                        <h7>Aチーム</h7>
+                        <table class="gameexective-table" border="1" width="100%">
+                            <tr>
+                            <th>ランク</th>
+                            <th>名前</th>
+                            </tr>
+                            <% @gameexective.where(our: "Aチーム").each do |t| %>
+                            <tr>
+                            <td width="25%"><%= t.rank %> </td>
+                            <td width="60%"><%= t.name%></td>
+                            </tr>
+                            <% end %>
+                        </table>              
+                        <h7>Bチーム</h7>
+                        <table class="gameexective-table" border="1" width="100%">
+                            <tr>
+                                <th >ランク</th>
+                                <th>名前</th>
+                            </tr>
+                            <% @gameexective.where(our: "Bチーム").each do |t| %>
+                            <tr>
+                                <td width="25%"><%= t.rank %> </td>
+                                <td width="60%"><%= t.name%></td>
+                            </tr>
+                            <% end %>
+                        </table>                 
+                    </div>
+
+
+
+                    <h5>得点集計</h5>
+                    <table border="1">
+                        <tr>
+                            <th>得点合計</th>
+                            <th>警告</th>
+                            <th>退場</th>
+                            <th>失格</th>
+                        </tr>
+
+                        <% a_point = 0 %>
+                        <% b_point = 0 %>
+                        <% @game.order("time_minute asc").where(half: "前半").each do |t| %>
+                            <% if t.our =="Aチーム"  %>
+                            <tr>
+                                <td>
+                                    <% if t.action == "得点"  %> 
+                                    <% a_point += 1 %>
+                                    <%= a_point %>
+                                    <% end %>
+                                
+                                </td>
+                                <td>
+                                    <% if t.action == "得点"  %> 
+                                    <% a_point += 1 %>
+                                    <%= a_point %>
+                                    <% end %>
+                                </td>
+                                <td >
+                                    <% if t.action == "得点"  %> 
+                                    <% a_point += 1 %>
+                                    <%= a_point %>
+                                    <% end %>
+                                </td>
+                                <td>
+                                    <% if t.action == "得点"  %> 
+                                    <% a_point += 1 %>
+                                    <%= a_point %>
+                                    <% end %>
+                                </td>
+                            </tr>
+                            <% end %>
+
+                            <% if t.our=="Bチーム"%>
+                            <tr>
+                                <td>
+                                    <% if t.action == "得点" %> 
+                                    <% b_point += 1 %>
+                                    <%= b_point %>
+                                    <% end %>
+                                </td>
+                                <td>
+                                    <% if t.action == "得点" %> 
+                                    <% b_point += 1 %>
+                                    <%= b_point %>
+                                    <% end %>
+                                </td>
+                                <td>
+                                    <% if t.action == "得点" %> 
+                                    <% b_point += 1 %>
+                                    <%= b_point %>
+                                    <% end %>
+                                </td>
+                                <td >
+                                    <% if t.action == "得点" %> 
+                                    <% b_point += 1 %>
+                                    <%= b_point %>
+                                    <% end %>
+                                </td>
+                            </tr>
+                            <% end %>
+                        <% end %>
+
+                    </table>
+
+
+                    <table border="1">
+                        <tr>
+                            <th>得点</th>
+                            <th>警告</th>
+                            <th>退場</th>
+                            <th>失格</th>
+                        </tr>
+
+                        <% a_point = 0 %>
+                        <% b_point = 0 %>
+                        <% @game.each do |t|  %>
+                            <% if t.our =="Aチーム"  %>
+                            <td>
+                            
+                            <%# 得点 %>
+                            <%# <% a_point==games.where(back_number: t.back_number).where(action: "得点").count %> 
+                            </td>
+                            <td>
+                            <%# 警告 %>
+                            </td>
+                            <td>
+                            <%# 退場 %>
+                            </td>
+                            <td>
+                            <%# 失格 %>
+                            </td>
+                            <% end %>
+                        <% end %>    
+                    </table>
+
+                    <%= @a_point %>
+    
+       
+
+
+
+
+                    <div class="score-sum">
+                            <h7>Aチーム</h7>
+                            <div class="point">
+                                <%= @a_point %>
+                            </div>
+                            <div class="faul">
+                                <%= @a_faul %>
+                            </div>
+                            <div class="two_minutes_faul">
+                                <%= @a_two_minutes_faul %>
+                            </div> 
+                            <div class="exit">
+                                <%= @a_exit %>
+                            </div>
+
+                            <h7>Bチーム</h7>
+                            <div class="point">
+                                <%= @b_point %>
+                            </div>
+                            <div class="faul">
+                                <%= @b_faul %>
+                            </div>
+                            <div class="two_minutes_faul">
+                                <%= @b_two_minutes_faul %> 
+                            </div> 
+                            <div class="exit">
+                                <%= @b_exit %>
+                            </div>
+                    </div>
                 </div>
-            <% end %>
 
-            <h3>試合経過</h3>
-            <% @game.each do |t| %>
-                <div class="game">
-                    <%= t.half %>
-                    <%= t.our %>
-                    <%= t.time_minute %>:<%= t.time_second %>
-                    <%= t.back_number %>
-                    <%= t.action %>
+
+
+                <div class="col-5">
+                <h5>スコア経過</h5>
+                <h7>前半</h7>
+                <table class="score-table" border="1" width="100%">
+                    <tr>
+                    <th>番号</th>
+                    <th>結果</th>
+                    <th>得点</th>
+                    <th>時間</th>
+                    <th>得点</th>
+                    <th>結果</th>
+                    <th>番号</th>
+                    </tr>
+                    
+                    <% a_point = 0 %>
+                    <% b_point = 0 %>
+                    <% @game.order("time_minute asc").where(half: "前半").each do |t| %>
+                        <% if t.our =="Aチーム"%>
+                        <tr>
+                            <td width="10%"><%= t.back_number %></td>
+                            <td width="20%"><%= t.action %></td>
+                            <td width="10%">
+                                <% if t.action == "得点" and t.our=="Aチーム" %> 
+                                <% a_point += 1 %>
+                                <%= a_point %>
+                                <% end %>
+                            </td>
+                            <td width="20%"><%= t.time_minute %>:<%= t.time_second %></td>
+                            <td width="10%"></td>
+                            <td width="20%"></td>
+                            <td width="10%"></td>
+                        </tr>
+                        <% end %>
+
+                        <% if t.our=="Bチーム"%>
+                        <tr>
+                            <td width="10%"></td>
+                            <td width="20%"></td>
+                            <td width="10%"></td>
+                            <td width="20%"><%= t.time_minute %>:<%= t.time_second %></td>
+                            <td width="10%" >
+                                <% if t.action == "得点" %> 
+                                <% b_point += 1 %>
+                                <%= b_point %>
+                                <% end %>
+                            </td>
+                            <td width="20%"><%= t.action %></td>
+                            <td width="10%"><%= t.back_number %></td>
+                        </tr>
+                        <% end %>
+                    <% end %>
+                </table>
+
+
+                <h7>後半</h7>
+                <table class="score-table" border="1" width="100%">
+                    <tr>
+                        <th>番号</th>
+                        <th>結果</th>
+                        <th>得点</th>
+                        <th>時間</th>
+                        <th>得点</th>
+                        <th>結果</th>
+                        <th>番号</th>
+                    </tr>
+                    
+                    <% @game.order("time_minute asc").where(half: "後半").each do |t| %>
+                        <% if t.our =="Aチーム"%>
+                        <tr>
+                            <td width="10%"><%= t.back_number %></td>
+                            <td width="20%"><%= t.action %></td>
+                            <td width="10%">
+                                <% if t.action == "得点" %> 
+                                <% a_point += 1 %>
+                                <%= a_point %>
+                                <% end %>
+                            </td>
+                            <td width="20%"><%= t.time_minute %>:<%= t.time_second %></td>
+                            <td width="10%"></td>
+                            <td width="20%"></td>
+                            <td width="10%"></td>
+                        </tr>
+                        <% end %>
+
+                        <% if t.our=="Bチーム"%>
+                        <tr>
+                            <td width="10%"></td>
+                            <td width="20%"></td>
+                            <td width="10%"></td>
+                            <td width="20%"><%= t.time_minute %>:<%= t.time_second %></td>
+                            <td width="10%">
+                                <% if t.action == "得点" %> 
+                                <% b_point += 1 %>
+                                <%= b_point %>
+                                <% end %>
+                            </td>
+                            <td width="20%"><%= t.action %></td>
+                            <td width="10%"><%= t.back_number %></td>
+                        </tr>
+                        <% end %>
+                    <% end %>
+                </table>
+
+
+
+
+                    
+                    <h5>タイムアウト</h5>
+                    <h7>Aチーム</h7>
+                    <div class="timeoutA-table">
+                        <table class="timeoutA-table1" border="1" width="100%">
+                        <tr>
+                            <th style="height:20px;">前半</th>
+                        </tr>
+                        <% @timeout.order("time_minute asc").where(our: "Aチーム", half:"前半").each do |t| %>
+                        <tr>
+                            <td><%= t.time_minute %>:<%= t.time_second %></td>
+                        </tr>
+                        <% end %>
+                        </table>
+
+                        <table class="timeoutA-table2" border="1" width="100%">
+                        <tr>
+                            <th style="height:20px;">後半</th>
+                        </tr>
+                        <% @timeout.order("time_minute asc").where(our: "Aチーム",half:"後半").each do |t| %>
+                        <tr>
+                            <td><%= t.time_minute %>:<%= t.time_second %></td>
+                        </tr>
+                        <% end %>
+                        </table>
+                    </div>
+                    
+
+                    <h7>Bチーム</h7>
+                    <div class="timeoutB-table">
+                        <table class="timeoutB-table1" border="1" width="100%">
+                        <tr>
+                            <th style="height:20px;">前半</th>
+                        </tr>
+                        <% @timeout.order("time_minute asc").where(our: "Bチーム", half:"前半").each do |t| %>
+                        <tr>
+                            <td><%= t.time_minute %>:<%= t.time_second %></td>
+                        </tr>
+                        <% end %>
+                        </table>
+
+                        <table class="timeoutB-table2" border="1" width="100%">
+                        <tr>
+                            <th style="height:20px;">後半</th>
+                        </tr>
+                        <% @timeout.order("time_minute asc").where(our: "Bチーム",half:"後半").each do |t| %>
+                        <tr>
+                            <td><%= t.time_minute %>:<%= t.time_second %></td>
+                        </tr>
+                        <% end %>
+                        </table>
+                    </div>
+
+
                 </div>
-            <% end %>
 
 
-            <%# ifで表示を分ける %>
-            <% if false %>
-            <%= コメント %>
-            <% end %>
-            <%#  %>
-
-
-            <h3>タイムアウト</h3>
-            <% @timeout.each do |t| %>
-                <div class="timeout">
-                    <%= t.half %>
-                    <%= t.our %>
-                    <%= t.time_minute %>:<%= t.time_second %>
-                </div>
-            <% end %>
-
-
-            <h3>得点集計</h3>
-            <h5>Aチーム</h5>
-            <div class="point">
-                <%= @a_point %>
-            </div>
-            <div class="faul">
-                <%= @a_faul %>
-            </div>
-            <div class="two_minutes_faul">
-                <%= @a_two_minutes_faul %> 
-            </div> 
-            <div class="exit">
-                <%= @a_exit %>
             </div>
 
-            <h5>Bチーム</h5>
-            <div class="point">
-                <%= @b_point %>
-            </div>
-            <div class="faul">
-                <%= @b_faul %>
-            </div>
-            <div class="two_minutes_faul">
-                <%= @b_two_minutes_faul %> 
-            </div> 
-            <div class="exit">
-                <%= @b_exit %>
-            </div>
+
         </div>
 
     </div>
