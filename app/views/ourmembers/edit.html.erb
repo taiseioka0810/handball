@@ -17,7 +17,7 @@
             <% if @ourmember %>
                 <h3>メンバー編集</h3>
                 <div class="member-home">
-                    <%= link_to "メンバー一覧に戻る",ourmembers_path %>
+                    <%= link_to "メンバー一覧に戻る",ourmembers_path, class:"btn btn-outline-primary" %>
                 </div>
                 <%= form_for(@ourmember, :url => { controller:'ourmembers', action:'update'})do |f| %>
                 <div class="member">

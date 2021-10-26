@@ -16,7 +16,7 @@
         <div class="col-9">
             <h3>基本情報編集</h3>
             <div class="home-link">
-                <%= link_to "スコア一覧に戻る",homes_path %>
+                <%= link_to "スコア一覧に戻る",homes_path, class:"btn btn-outline-primary" %>
             </div>
             <%= form_for(@input, :url => { controller:'inputs', action:'update'})do |f| %>
             <div class="input">
