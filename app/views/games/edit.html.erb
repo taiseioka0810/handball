@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag "games", :media => "all" %>
+<%= stylesheet_link_tag "games-edit", :media => "all" %>
 
 <div class="container">
     <div class="row ">
@@ -16,44 +16,59 @@
             <% if @game %>
                 <h3>スコア編集</h3>
                 <%= form_for(@game, :url => { controller:'games', action:'update'})do |f| %>
-                    <%= f.label :チーム選択 %>
-                    <%= f.select :our ,
-                        [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
-                    <%= f.label :時間 %>
-                    <%= f.number_field :time_minute, min:0, max:30 %>:<%= f.number_field :time_second, min:00, max:59 %>
-                    <%= f.label :背番号 %>
-                    <%= f.number_field :back_number, :size => 5 %> 
-                    <%= f.label :アクション %>
-                    <%= f.select :action, 
-                        [["得点"],["警告"],["2分間退場"],["7mスロー得点"],["7mスロー失敗"],["失格"]], include_blank: "選択して下さい" %>
-                    <%= f.submit "編集する" %>
+                    <div class="game">
+                        <div class="game1">
+                            <%= f.label :チーム選択 %>
+                            <%= f.select :our ,
+                                [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
+                            <%= f.label :背番号 %>
+                            <%= f.number_field :back_number, :size => 5 %> 
+                            <%= f.label :アクション %>
+                            <%= f.select :action, 
+                                [["得点"],["警告"],["2分間退場"],["7mスロー得点"],["7mスロー失敗"],["失格"]], include_blank: "選択して下さい" %>
+                        </div>
+                        <div class="game2">
+                            <div class="game2-1">
+                                <%= f.label :時間 %>
+                                <%= f.number_field :time_minute, min:0, max:30 %>:<%= f.number_field :time_second, min:00, max:59 %>
+                            </div>
+                            <div class="game2-2">
+                                <%= f.submit "編集する" %>
+                            </div>
+                        </div>
+                    </div>
                 <% end %>
             <% end %>
 
             <% if @timeout %>
                 <h3>タイムアウト編集</h3>
                 <%= form_for(@timeout, :url => { controller:'timeouts', action:'update'})do |f| %>
-                    <%= f.label :チーム %>
-                    <%= f.select :our, 
-                        [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
-                    <%= f.number_field :time_minute, min:0, max:30 %>:<%= f.number_field :time_second, min:00, max:59 %>
-                    <%= f.label :背番号 %>
-                    <%= f.submit "編集する" %>
+                    <div class="game">
+                        <%= f.label :チーム %>
+                        <%= f.select :our, 
+                            [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
+                        <%= f.number_field :time_minute, min:0, max:30 %>:<%= f.number_field :time_second, min:00, max:59 %>
+                        <%= f.label :背番号 %>
+                        <%= f.submit "編集する" %>
+                    </div>
                 <% end %>
+                
             <% end %>
 
 
             <% if @gamemember %>
                 <h3>相手チームメンバー登録</h3>
                 <%= form_for(@gamemember, :url => { controller:'gamemembers', action:'update'})do |f| %>
-                    <%= f.label :チーム %>
-                    <%= f.select :our, 
-                        [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
-                    <%= f.label :背番号 %>
-                    <%= f.number_field :back_number,size: 5%>
-                    <%= f.label :氏名 %>
-                    <%= f.text_field :name, size: 10%>
-                    <%= f.submit "編集する"%>
+                    <div class="game">
+                        <%= f.label :チーム %>
+                        <%= f.select :our, 
+                            [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
+                        <%= f.label :背番号 %>
+                        <%= f.number_field :back_number,size: 5%>
+                        <%= f.label :氏名 %>
+                        <%= f.text_field :name, size: 10%>
+                        <%= f.submit "編集する"%>
+                    </div>
                 <% end %>
             <% end %>
 
@@ -61,15 +76,17 @@
             <% if @gameexective %>
                 <h3>相手役員編集</h3>
                 <%= form_for(@gameexective, :url => { controller:'gameexectives', action:'update'})do |f| %>
-                    <%= f.label :チーム %>
-                    <%= f.select :our, 
-                        [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
-                    <%= f.label :役員ランク %>
-                    <%= f.select :rank, 
-                        [["役員A"],["役員B"],["役員C"],["役員D"]], include_blank: "選択して下さい" %>
-                    <%= f.label :氏名 %>
-                    <%= f.text_field :name, size: 10%>
-                    <%= f.submit "編集する"%>
+                    <div class="game">
+                        <%= f.label :チーム %>
+                        <%= f.select :our, 
+                            [["Aチーム"],["Bチーム"]], include_blank:"選択してください" %>
+                        <%= f.label :役員ランク %>
+                        <%= f.select :rank, 
+                            [["役員A"],["役員B"],["役員C"],["役員D"]], include_blank: "選択して下さい" %>
+                        <%= f.label :氏名 %>
+                        <%= f.text_field :name, size: 10%>
+                        <%= f.submit "編集する"%>
+                    </div>
                 <% end %>   
             <% end %>
         </div>

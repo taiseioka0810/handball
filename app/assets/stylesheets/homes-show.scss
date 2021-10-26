@@ -14,7 +14,9 @@
     text-align:center;
 }
 .input{
-    text-align:right;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
 }
 .input h5{
     text-align:right;
@@ -30,6 +32,13 @@
 }
 .score-sum{
     display:flex;
+}
+.sum{
+    text-align:center;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+   
 }
 
 

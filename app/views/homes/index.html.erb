@@ -51,25 +51,34 @@
                 <%end%>
             </div>
 
+
             <div class="home">
                 <% @input_show.each do |t| %>
-                    <div class="home1">
-                        <%= t.date %>
-                        <%= t.place %>
-                        <%= t.game_name %>
-                        <%= t.game_round %>
-                        <%= t.gender %>
-                        <%= t.age %>
-                        <div class="home2">
-                            <%= link_to "編集する", edit_home_path(t.id) %> 
-                            <%= link_to "スコア詳細", home_path(t.id) %> 
-                            
-                            <div class="home2-end">
-                                <%= link_to "試合経過作成", games_index_path(t.id), class:"btn btn-outline-primary" %> 
-                                <%= link_to "削除", input_path(t.id), method: :delete, class:"btn btn-danger"%>
-                            </div>
-                        </div>
+                <div class="card " style="max-width: 18rem;">
+                    <div class="card-header">
+                        <div class="card-header-name">スコア</div>
+                        <div class="delete-button"><%= link_to "削除", input_path(t.id), method: :delete, class:"btn btn-danger"%></div>
                     </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= t.date %>
+                            <%= t.place %>
+                            <%= t.game_name %>
+                            <%= t.game_round %>
+                            <%= t.gender %>
+                            <%= t.age %>
+                        </h5>
+                        <p class="card-text">
+                            <div class="game-button">
+                                <%= link_to "試合経過作成", games_index_path(t.id), class:"btn btn-primary" %>  
+                            </div>
+                            <div class="edit-home-button">
+                                <%= link_to "スコア詳細", home_path(t.id), class:"btn btn-outline-primary" %>
+                                <%= link_to "編集する", edit_home_path(t.id), class:"btn btn-outline-primary"%>
+                            </div>
+                        </p>
+                    </div>
+                </div>
                 <% end %>
             </div>
 
@@ -77,6 +86,7 @@
 
     </div>
 </div>  
+
 
 
 

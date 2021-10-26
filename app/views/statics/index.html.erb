@@ -2,16 +2,24 @@
 
 
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
   <div class="carousel-inner">
-    <div class="carousel-item active image1" style="height:28rem;">
-      <%= image_tag('background4.jpg', class:"d-block w-100", alt:"third-slide") %>
-      <p>handball</p>
+    <div class="carousel-item active" >
+      <%= image_tag('top1.jpg', class:"d-block w-100", alt:"third-slide") %>
+      <h3>handball score</h3>      
     </div>
-    <div class="carousel-item" style="height:28rem;">
-      <%= image_tag('background3.jpg', class:"d-block w-100", alt:"third-slide") %>
+    
+    <div class="carousel-item" >
+      <%= image_tag('top2.jpg', class:"d-block w-100", alt:"third-slide") %>
+      <h3 >handball score</h3>
     </div>
-    <div class="carousel-item" style="height:28rem;">
-      <%= image_tag('background2.jpg', class:"d-block w-100", alt:"third-slide") %>
+    <div class="carousel-item" >
+      <%= image_tag('running.jpg', class:"d-block w-100", alt:"third-slide") %>
+      <h3 style="">handball score</h3>
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -32,7 +40,7 @@
         <div class="col-3">
             <div class="card" style="width: 18rem; height:32rem; margin-top:4rem;">
             <h5 class="card-header" style="font-weight: bold;">ハンドボールとは</h5>
-            <%= image_tag('background3.jpg', class:"d-block w-100", alt: "特徴1") %>
+            <%= image_tag('top3.jpg', class:"d-block w-100", alt: "特徴1") %>
                 <div class="card-body">
                     <p class="card-text">そもそもハンドボールって何？って思われる人が多いと思います．</p>
                     <p class="card-text">念のため，ハンドボールの基本的なルールなど簡単にですが説明します！</p>
@@ -45,7 +53,7 @@
         <div class="col-3">
             <div class="card" style="width: 18rem; height:28rem; margin-top:4rem;">
             <h5 class="card-header" style="font-weight: bold;">スコアについて</h5>
-            <%= image_tag('background2.jpg', class:"d-block w-100", alt: "特徴2") %>
+            <%= image_tag('notebook.jpg', class:"d-block w-100", alt: "特徴2") %>
                 <div class="card-body">
                     <p class="card-text">ハンドボールのスコアって非常にわかりづらく，書き方が難しいです😢</p>
                     <p class="card-text">詳しくは以下のボタンをクリック</p>
@@ -55,9 +63,9 @@
         </div>
 
         <div class="col-3">
-            <div class="card" style="width: 18rem; height:25rem; margin-top:4rem;">
+            <div class="card" style="width: 18rem; height:27rem; margin-top:4rem;">
             <h5 class="card-header" style="font-weight: bold;">スコア作成</h5>
-            <%= image_tag('background4.jpg', class:"d-block w-100", alt: "特徴3") %>
+            <%= image_tag('computer.jpg', class:"d-block w-100", alt: "特徴3") %>
                 <div class="card-body">
                     <p class="card-text">実際にスコアを作成してみませんか？</p>
                     <p class="card-text">以下のボタンをクリック</p>

@@ -15,30 +15,35 @@
 
         <div class="col-9">
             <h3>基本情報編集</h3>
+            <div class="home-link">
+                <%= link_to "スコア一覧に戻る",homes_path %>
+            </div>
             <%= form_for(@input, :url => { controller:'inputs', action:'update'})do |f| %>
-            <div class="input1">
-                <%= f.label :日付 %>
-                <%= f.date_field :date, :size => 5 %> 
+            <div class="input">
+                <div class="input1">
+                    <%= f.label :日付 %>
+                    <%= f.date_field :date, :size => 5 %> 
 
-                <%= f.label :場所 %>
-                <%= f.text_field :place, :size => 5 %> 
+                    <%= f.label :場所 %>
+                    <%= f.text_field :place, :size => 5 %> 
 
-                <%= f.label :大会名 %>
-                <%= f.text_field :game_name, :size => 5 %> 
-            </div>
-            <div class="input2">
-                <%= f.label :性別 %>
-                <%= f.select :gender, 
-                [["男"],["女"]], include_blank: "選択して下さい" %>
+                    <%= f.label :大会名 %>
+                    <%= f.text_field :game_name, :size => 5 %> 
+                </div>
+                <div class="input2">
+                    <%= f.label :性別 %>
+                    <%= f.select :gender, 
+                    [["男"],["女"]], include_blank: "選択して下さい" %>
 
-                <%= f.label :回戦%>
-                <%= f.text_field :game_round, :size => 5 %> 
+                    <%= f.label :回戦%>
+                    <%= f.text_field :game_round, :size => 5 %> 
 
-                <%= f.label :種別 %>
-                <%= f.text_field :age, :size => 5 %> 
-            </div>
-            <div class="input3">
-                <%= f.submit "編集する" %>
+                    <%= f.label :種別 %>
+                    <%= f.text_field :age, :size => 5 %> 
+                </div>
+                <div class="input3">
+                    <%= f.submit "編集する" %>
+                </div>
             </div>
             <% end %>
         </div>

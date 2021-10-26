@@ -17,41 +17,46 @@
         <div class="col-9">
             <h3>メンバー</h3>
             <%= form_for(@ourmember, :url => { controller:'ourmembers', action:'create'})do |f| %>
-            <div class="member1">
-                <%= f.label :メンバー背番号 %>
-                <div class="field">
-                    <%= f.number_field :back_number%>
+            <div class="member">
+                <div class="member1">
+                    <%= f.label :メンバー背番号 %>
+                    <div class="field">
+                        <%= f.number_field :back_number%>
+                    </div>
+                    <%= f.label :メンバー氏名 %>
+                    <div class="field">
+                        <%= f.text_field :name,size: 30%>
+                    </div>
                 </div>
-                <%= f.label :メンバー氏名 %>
-                <div class="field">
-                    <%= f.text_field :name,size: 30%>
+                <div class="member1-submit">
+                    <%= f.submit "登録"%>
                 </div>
-            </div>
-            <div class="member1-submit">
-                <%= f.submit "登録"%>
             </div>
             <% end %>
 
             <%= form_for(@ourexective, :url => { controller:'ourexectives', action:'create'})do |f| %>
-            <div class="member2">
-                <%= f.label :役員ランク %>
-                <div class="field">
-                    <%= f.select :rank, 
-                    [["役員A"],["役員B"],["役員C"],["役員D"]], include_blank: "選択して下さい" %>
+            <div class="member">
+                <div class="member2">
+                    <%= f.label :役員ランク %>
+                    <div class="field">
+                        <%= f.select :rank, 
+                        [["役員A"],["役員B"],["役員C"],["役員D"]], include_blank: "選択して下さい" %>
+                    </div>
+                    <%= f.label :役員氏名 %>
+                    <div class="field">
+                        <%= f.text_field :name,size: 30%>
+                    </div>
                 </div>
-                <%= f.label :役員氏名 %>
-                <div class="field">
-                    <%= f.text_field :name,size: 30%>
+                <div class="member2-submit">
+                    <%= f.submit "登録"%>
                 </div>
-            </div>
-            <div class="member2-submit">
-                <%= f.submit "登録"%>
             </div>
             <% end %> 
 
             <h3>メンバー一覧</h3>
-            <div class="row ">
+            <div class="row justify-content-center">
                 <div class="col-md">
+                    <h5>メンバー</h5>
                     <table border="1">
                         <tr>
                             <th>背番号</th>
@@ -60,9 +65,9 @@
                         </tr>
                         <% @ourmembers.each do |t| %>
                         <tr>
-                            <td><%= t.back_number %></td>
-                            <td><%= t.name %></td>
-                            <td>
+                            <td width="10%"><%= t.back_number %></td>
+                            <td width="65%"><%= t.name %></td>
+                            <td width="25%">
                                 <%= link_to "編集", edit_ourmember_path(ourmember_id: t.id, id: t.id) %>
                                 <%= link_to "削除", ourmember_path(t.id), method: :delete %>
                             </td>
@@ -71,7 +76,8 @@
                     </table>
                 </div>
 
-                <div class="col-md">                 
+                <div class="col-md">       
+                    <h5>役員</h5>          
                     <table border="1">
                         <tr>
                             <th>ランク</th>
@@ -80,9 +86,9 @@
                         </tr>
                             <% @ourexectives.each do |t| %>
                         <tr>
-                            <td><%= t.rank %></td>
-                            <td><%= t.name %></td>
-                            <td>
+                            <td width="20%"><%= t.rank %></td>
+                            <td width="55%"><%= t.name %></td>
+                            <td width="25%">
                                 <%= link_to "編集", edit_ourmember_path(ourexective_id: t.id, id: t.id) %>
                                 <%= link_to "削除", ourexective_path(t.id), method: :delete %>
                             </td>

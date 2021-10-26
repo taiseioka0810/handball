@@ -15,7 +15,6 @@
     background-color: #D0F5DF;
     font-weight: bold;
     font-size: large;
-
 }
 .input1{
     display: flex;
@@ -34,10 +33,12 @@
     flex-direction: row;
     justify-content: flex-end;
     font-size: large;
+    margin-right:10px;
 }
 
 .home{
-    margin:20px;
+    margin-top:60px;
+    margin-bottom:40px;
     font-weight: bold;
     display:flex;
     flex-direction: row;
@@ -47,17 +48,38 @@
 }
 
 .home1{
-    margin-top:20px;
+    border:3px solid black;
+    border-radius: 15px;
+    margin:20px;
     width: 300px;
     height: auto;
-    border:5px solid black;
+    
 }
-.home2{
-    margin:10px;
+.card{
+    margin-bottom:40px;
 }
-.home2-end{
+
+.card-header{
+    display:flex;
+    flex-direction:row;
+    font-size:18px;
+}
+.card-header-name{
+    font-weight:bold;
+    text-align:center;
+}
+.delete-button{
+    margin-left:auto;
+}
+.edit-home-button{
     margin-top:20px;
 }
+.game-button{
+    margin-top:20px;
+}
+
+
+
 
 input[type="text"]{
     width: 100px;;

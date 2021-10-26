@@ -4,30 +4,31 @@
     margin: 20px;
     font-family:cursive;
 }
-.input{
+
+.game{
     border-radius: 15px;
     margin:20px;
     background-color: #D0F5DF;
     font-weight: bold;
 }
 
-
-.input1{
+.game1{
     display:flex;
     flex-direction: row;
     justify-content:space-evenly;
     margin:20px;
 }
-.input2{
+.game2{
     display:flex;
     flex-direction: row;
     justify-content:space-evenly;
     margin-right:20px;
     margin-left:20px;
+    margin-bottom:20px;
 
 }
 
-.input3{
-    text-align:right;
-    margin-bottom:20px;
+
+input[type="number"]{
+    width: 40px;
 }

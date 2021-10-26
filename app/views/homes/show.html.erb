@@ -16,8 +16,13 @@
         <div class="col-9">
             <h3>スコア詳細</h3>
             <div class="input">
-                <h5>試合基本情報</h5>
                 <div class="input1">
+                    <%= link_to "スコア一覧に戻る",homes_path %>
+                </div>
+                
+                
+                <div class="input2">
+                    <h5>試合基本情報</h5>
                     <%= @input.date %>
                     <%= @input.place %>
                     <%= @input.game_name %>
@@ -25,6 +30,8 @@
                     <%= @input.gender %>
                     <%= @input.age %>
                 </div>
+
+
             </div>
             
             <div class="row justify-content-around">
@@ -46,11 +53,11 @@
                             <tr>
                                 <td width="10%"><%= t.back_number %></td>
                                 <td style="width:100px;"><%= t.name%></td>
-                                <td><%= @a_point %></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%= @game.where(back_number: t.back_number).where(action: "得点").where(our:"Aチーム").where(half: "前半").count %></td>
+                                <td><%= @game.where(back_number: t.back_number).where(action: "得点").where(our:"Aチーム").where(half: "後半").count %></td>
+                                <td> <%= @game.where(back_number: t.back_number).where(action: "警告").where(our:"Aチーム").count %></td>
+                                <td><%= @game.where(back_number: t.back_number).where(action: "2分間退場").where(our:"Aチーム").count %></td>
+                                <td><%= @game.where(back_number: t.back_number).where(action: "失格").where(our:"Aチーム").count %></td>
                             </tr>
                             <% end %>
                         </table>
@@ -70,15 +77,16 @@
                             <tr>
                                 <td width="10%"><%= t.back_number %></td>
                                 <td style="width:100px;"><%= t.name%></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><%= @game.where(back_number: t.back_number).where(action: "得点").where(our:"Bチーム").where(half: "前半").count %></td>
+                                <td><%= @game.where(back_number: t.back_number).where(action: "得点").where(our:"Bチーム").where(half: "後半").count %></td>
+                                <td><%= @game.where(back_number: t.back_number).where(action: "警告").where(our:"Bチーム").count %></td>
+                                <td><%= @game.where(back_number: t.back_number).where(action: "2分間退場").where(our:"Bチーム").count %></td>
+                                <td><%= @game.where(back_number: t.back_number).where(action: "失格").where(our:"Bチーム").count %></td>
                             </tr>
                             <% end %>
                         </table>
                         
+
                         <h5>役員</h5>
                         <h7>Aチーム</h7>
                         <table class="gameexective-table" border="1" width="100%">
@@ -106,150 +114,6 @@
                             </tr>
                             <% end %>
                         </table>                 
-                    </div>
-
-
-
-                    <h5>得点集計</h5>
-                    <table border="1">
-                        <tr>
-                            <th>得点合計</th>
-                            <th>警告</th>
-                            <th>退場</th>
-                            <th>失格</th>
-                        </tr>
-
-                        <% a_point = 0 %>
-                        <% b_point = 0 %>
-                        <% @game.order("time_minute asc").where(half: "前半").each do |t| %>
-                            <% if t.our =="Aチーム"  %>
-                            <tr>
-                                <td>
-                                    <% if t.action == "得点"  %> 
-                                    <% a_point += 1 %>
-                                    <%= a_point %>
-                                    <% end %>
-                                
-                                </td>
-                                <td>
-                                    <% if t.action == "得点"  %> 
-                                    <% a_point += 1 %>
-                                    <%= a_point %>
-                                    <% end %>
-                                </td>
-                                <td >
-                                    <% if t.action == "得点"  %> 
-                                    <% a_point += 1 %>
-                                    <%= a_point %>
-                                    <% end %>
-                                </td>
-                                <td>
-                                    <% if t.action == "得点"  %> 
-                                    <% a_point += 1 %>
-                                    <%= a_point %>
-                                    <% end %>
-                                </td>
-                            </tr>
-                            <% end %>
-
-                            <% if t.our=="Bチーム"%>
-                            <tr>
-                                <td>
-                                    <% if t.action == "得点" %> 
-                                    <% b_point += 1 %>
-                                    <%= b_point %>
-                                    <% end %>
-                                </td>
-                                <td>
-                                    <% if t.action == "得点" %> 
-                                    <% b_point += 1 %>
-                                    <%= b_point %>
-                                    <% end %>
-                                </td>
-                                <td>
-                                    <% if t.action == "得点" %> 
-                                    <% b_point += 1 %>
-                                    <%= b_point %>
-                                    <% end %>
-                                </td>
-                                <td >
-                                    <% if t.action == "得点" %> 
-                                    <% b_point += 1 %>
-                                    <%= b_point %>
-                                    <% end %>
-                                </td>
-                            </tr>
-                            <% end %>
-                        <% end %>
-
-                    </table>
-
-
-                    <table border="1">
-                        <tr>
-                            <th>得点</th>
-                            <th>警告</th>
-                            <th>退場</th>
-                            <th>失格</th>
-                        </tr>
-
-                        <% a_point = 0 %>
-                        <% b_point = 0 %>
-                        <% @game.each do |t|  %>
-                            <% if t.our =="Aチーム"  %>
-                            <td>
-                            
-                            <%# 得点 %>
-                            <%# <% a_point==games.where(back_number: t.back_number).where(action: "得点").count %> 
-                            </td>
-                            <td>
-                            <%# 警告 %>
-                            </td>
-                            <td>
-                            <%# 退場 %>
-                            </td>
-                            <td>
-                            <%# 失格 %>
-                            </td>
-                            <% end %>
-                        <% end %>    
-                    </table>
-
-                    <%= @a_point %>
-    
-       
-
-
-
-
-                    <div class="score-sum">
-                            <h7>Aチーム</h7>
-                            <div class="point">
-                                <%= @a_point %>
-                            </div>
-                            <div class="faul">
-                                <%= @a_faul %>
-                            </div>
-                            <div class="two_minutes_faul">
-                                <%= @a_two_minutes_faul %>
-                            </div> 
-                            <div class="exit">
-                                <%= @a_exit %>
-                            </div>
-
-                            <h7>Bチーム</h7>
-                            <div class="point">
-                                <%= @b_point %>
-                            </div>
-                            <div class="faul">
-                                <%= @b_faul %>
-                            </div>
-                            <div class="two_minutes_faul">
-                                <%= @b_two_minutes_faul %> 
-                            </div> 
-                            <div class="exit">
-                                <%= @b_exit %>
-                            </div>
                     </div>
                 </div>
 
@@ -357,6 +221,22 @@
                         <% end %>
                     <% end %>
                 </table>
+
+
+
+                <h7>得点集計</h7>
+                <table border="1" width="100%">
+                    <tr>
+                        <th>合計</th>
+                        <th>合計</th>
+                    </tr>
+                    <tr>
+                        <th><%= @game.where(action: "得点").where(our: "Aチーム").count %></th>
+                        <th><%= @game.where(action: "得点").where(our: "Bチーム").count %></th>
+                    </tr>
+                </table>
+                
+                
 
 
 
